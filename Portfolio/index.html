@@ -9,6 +9,7 @@
     <script src="/Users/vatsavabbu/Desktop/Personal-Portfolio/Scripts/Index.js"></script>
     <script src="https://kit.fontawesome.com/eb347b1830.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
     <div id="header">
         <div class="container">
@@ -20,27 +21,27 @@
                     <li><a href="#services">Services</a></li>
                     <li><a href="#portfolio">Portfolio</a></li>
                     <li><a href="#contact">Contact</a></li>
-                    <i class="fas fa-times" onclick="closemenu()"></i>
+                    <i class="fas fa-times" onclick="closemenu()" aria-label="Close menu"></i>
                 </ul>
-                
-                <i class="fas fa-bars" onclick="openmenu()"></i>
+                <i class="fas fa-bars" onclick="openmenu()" aria-label="Open menu"></i>
             </nav>
         </div>
         <div class="header-text">
             <p>Software Engineer</p>
-            <h1>Hi I'm <span>Srivatsav</span> From India</h1>
+            <h1>Hi, I'm <span>Srivatsav</span> From India</h1>
         </div>
     </div>
+
     <!-- -------------------about-------------------------------- -->
     <div id="about">
         <div class="container">
             <div class="row">
                 <div class="about-col-1">
-                    <img src="images/user.png">
+                    <img src="images/user.png" alt="Srivatsav's image">
                 </div>
                 <div class="about-col-2">
                     <h1 class="sub-title">About Me</h1>
-                    <p> A versatile Software Engineer with over three years of experience involved in various projects. Specially focused on Database Management and building quality solutions</p>
+                    <p> A versatile Software Engineer with over three years of experience involved in various projects. Specially focused on Database Management and building quality solutions.</p>
                     <div class="tab-titles">
                         <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
                         <p class="tab-links" onclick="opentab('experience')">Experience</p>
@@ -68,85 +69,87 @@
             </div>
         </div>
     </div>
-<!-- -------------------services-------------------------------- -->
-<div id="services">
-    <div class="container">
-        <h1 class="sub-title">My Services</h1>
-        <div class="services-list">
-            <div>
-                <i class="fa-solid fa-code"></i>
-                <h2>Web App Design</h2>
-                <p>Building dynamic and responsive Web applications</p>
-            </div>
-            <div>
-                <i class="fa-solid fa-magnifying-glass-chart"></i>
-                <h2>Data Analysis</h2>
-                <p>Analyzing data and extracting insightful data</p>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- -------------------portfolio-------------------------------- -->
-<div id="portfolio">
-    <div class="container">
-        <h1 class="sub-title">My Work</h1>
-        <div class="work-list">
-            <div class="work">
-                <img src="Images/Proj1.jpg">
-                <div class="layer">
-                    <h3>AV DANSESTUDIO</h3>
-                    <p>A professional website for a Bharatanatyam Dance Center, highlighting its offerings, instructor expertise, and performance history, with an emphasis on client engagement.</p>
-                    <a href="https://avdanse.no/"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+
+    <!-- -------------------services-------------------------------- -->
+    <div id="services">
+        <div class="container">
+            <h1 class="sub-title">My Services</h1>
+            <div class="services-list">
+                <div>
+                    <i class="fa-solid fa-code"></i>
+                    <h2>Web App Design</h2>
+                    <p>Building dynamic and responsive Web applications</p>
                 </div>
-            </div>
-            <div class="work">
-                <img src="Images/img2.jpg">
-                <div class="layer">
-                    <h3>Tennis Connect</h3>
-                    <p>Tennis Connect is an online platform developed by Tennis Australia to help tennis clubs, coaches, associations, and players manage and engage with tennis activities across Australia. It's not a standalone "web app" in the sense of being a single product, but more of an integrated digital solution within Tennis Australia’s broader digital ecosystem.</p>
-                    <a href="https://tc.tennis.com.au/"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-                </div>
-            </div>
-            <div class="work">
-                <img src="Images/img3.jpg">
-                <div class="layer">
-                    <h3>Oil Spill Simulation</h3>
-                    <p>This project simulates the movement of an oil spill in a coastal region, specifically designed for "Bay City." The simulation evaluates the impact of the spill on fishing grounds, offering insights to help mitigate environmental and economic damage.</p>
-                    <a href="https://github.com/Srivatsav1298/INF202_Project"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                <div>
+                    <i class="fa-solid fa-magnifying-glass-chart"></i>
+                    <h2>Data Analysis</h2>
+                    <p>Analyzing data and extracting insightful data</p>
                 </div>
             </div>
         </div>
-        <!-- <a href="#" class="btn">See more</a> -->
     </div>
-</div>
-<!-- -------------------Contact Section-------------------------------- -->
-<div id="contact">
-    <div class="container">
-        <div class="row">
-            <div class="contact-left">
-                <h1 class="sub-title">Contact Me</h1>
-                <p><i class="fa-solid fa-paper-plane"></i> srivatsavs98@gmail.com</p>
-                <p><i class="fa-solid fa-square-phone"></i> +47 96705697</p>
-                <div class="social-icons">
-                    <a href="https://www.linkedin.com/in/srivatsav-s/"><i class="fa-brands fa-linkedin"></i></a>
+
+    <!-- -------------------portfolio-------------------------------- -->
+    <div id="portfolio">
+        <div class="container">
+            <h1 class="sub-title">My Work</h1>
+            <div class="work-list">
+                <div class="work">
+                    <img src="Images/Proj1.jpg" alt="AV DANSESTUDIO project">
+                    <div class="layer">
+                        <h3>AV DANSESTUDIO</h3>
+                        <p>A professional website for a Bharatanatyam Dance Center, highlighting its offerings, instructor expertise, and performance history, with an emphasis on client engagement.</p>
+                        <a href="https://avdanse.no/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
                 </div>
-                <a href="Images/my-cv.pdf" class="btn btn2" download>Download CV</a>
-            </div>
-            <div class="contact-right">
-                <form name="submit-to-google-sheet">
-                    <input type="text" name="Name" placeholder="Your Name" required>
-                    <input type="email" name="Email" placeholder="Your EmailId" required>
-                    <textarea name="Message" rows="6" placeholder="Your Message"></textarea>
-                    <button type="submit" class="btn btn2">Submit</button>
-                </form>
-                <span id="msg"></span>
+                <div class="work">
+                    <img src="Images/img2.jpg" alt="Tennis Connect project">
+                    <div class="layer">
+                        <h3>Tennis Connect</h3>
+                        <p>An online platform by Tennis Australia for managing tennis clubs, coaches, associations, and players across the country.</p>
+                        <a href="https://tc.tennis.com.au/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                </div>
+                <div class="work">
+                    <img src="Images/img3.jpg" alt="Oil Spill Simulation project">
+                    <div class="layer">
+                        <h3>Oil Spill Simulation</h3>
+                        <p>This project simulates the movement of an oil spill, evaluating the impact on fishing grounds for mitigation strategies.</p>
+                        <a href="https://github.com/Srivatsav1298/INF202_Project" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="copyright">
-        <p>Copyright © Srivatsav.</p>
+
+    <!-- -------------------Contact Section-------------------------------- -->
+    <div id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="contact-left">
+                    <h1 class="sub-title">Contact Me</h1>
+                    <p><i class="fa-solid fa-paper-plane"></i> srivatsavs98@gmail.com</p>
+                    <p><i class="fa-solid fa-square-phone"></i> +47 96705697</p>
+                    <div class="social-icons">
+                        <a href="https://www.linkedin.com/in/srivatsav-s/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i></a>
+                    </div>
+                    <a href="Images/my-cv.pdf" class="btn btn2" download>Download CV</a>
+                </div>
+                <div class="contact-right">
+                    <form name="submit-to-google-sheet">
+                        <input type="text" name="Name" placeholder="Your Name" required>
+                        <input type="email" name="Email" placeholder="Your EmailId" required>
+                        <textarea name="Message" rows="6" placeholder="Your Message"></textarea>
+                        <button type="submit" class="btn btn2">Submit</button>
+                    </form>
+                    <span id="msg"></span>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>Copyright © Srivatsav.</p>
+        </div>
     </div>
-</div>
 <script>
     var sidemenu = document.getElementById("sidemenu");
     function openmenu(){
