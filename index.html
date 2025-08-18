@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="/Users/vatsavabbu/Desktop/Personal-Portfolio/Scripts/Index.js"></script>
+    <script src="https://kit.fontawesome.com/eb347b1830.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div id="header">
+        <div class="container">
+            <nav>
+                <img src="Images/Logo.png" class="logo" alt="Logo">
+                <ul id="sidemenu">
+                    <li><a href="#header">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <i class="fas fa-times" onclick="closemenu()" aria-label="Close menu"></i>
+                </ul>
+                <i class="fas fa-bars" onclick="openmenu()" aria-label="Open menu"></i>
+            </nav>
+        </div>
+        <div class="header-text">
+            <p>Software Engineer</p>
+            <h1>Hi, I'm <span>Srivatsav</span> From India</h1>
+        </div>
+    </div>
+
+    <!-- -------------------about-------------------------------- -->
+    <div id="about">
+        <div class="container">
+            <div class="row">
+                <div class="about-col-1">
+                    <img src="images/user.png" alt="Srivatsav's image">
+                </div>
+                <div class="about-col-2">
+                    <h1 class="sub-title">About Me</h1>
+                    <p> A Software Engineer with over three years of professional experience, specializing in Frontend Development and Database Management. Passionate about delivering robust, scalable, and user-centric digital solutions.</p>
+                    <div class="tab-titles">
+                        <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
+                        <p class="tab-links" onclick="opentab('experience')">Experience</p>
+                        <p class="tab-links" onclick="opentab('education')">Education</p>
+                    </div>
+                    <div class="tab-contents active-tab" id="skills">
+                        <ul>
+                            <li><span>Programming Languages</span><br>Python, JavaScript</li>
+                            <li><span>Web Technologies</span><br>HTML, CSS</li>
+                            <li><span>Databases</span><br>Microsoft SQL Server (MSSQL), PostgreSQL</li>
+                            <li><span>Version Control</span><br>Git, GitHub</li>
+                            <li><span>Cloud Platforms</span><br>Amazon Web Services (AWS)</li>
+                        </ul>
+                    </div>
+                    <div class="tab-contents" id="experience">
+                        <ul>
+                            <li><span>2020 - 2024</span><br>Software Engineer at Orion Innovation</li>
+                        </ul>
+                    </div>
+                    <div class="tab-contents" id="education">
+                        <ul>
+                            <li><span>2024 - Present</span><br>Pursuing a Master's in Data Science</li>
+                            <li><span>2016 - 2020</span><br>Bachelor’s Degree in Computer Science and Engineering</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- -------------------services-------------------------------- -->
+    <div id="services">
+        <div class="container">
+            <h1 class="sub-title">My Services</h1>
+            <div class="services-list">
+                <div>
+                    <i class="fa-solid fa-code"></i>
+                    <h2>Web Application Development</h2>
+                    <p>Designing and developing custom web applications tailored to client requirements</p>
+                </div>
+                <div>
+                    <i class="fa-solid fa-magnifying-glass-chart"></i>
+                    <h2>Data Analysis</h2>
+                    <p>Interpreting complex datasets to uncover trends, patterns, and insights aligned with business objectives</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- -------------------portfolio-------------------------------- -->
+    <div id="portfolio">
+        <div class="container">
+            <h1 class="sub-title">My Work</h1>
+            <div class="work-list">
+                <div class="work">
+                    <img src="Images/Proj1.jpg" alt="AV DANSESTUDIO project">
+                    <div class="layer">
+                        <h3>AV DANSESTUDIO</h3>
+                        <p>A professional website for a Bharatanatyam Dance Center, highlighting its offerings, instructor expertise, and performance history, with an emphasis on client engagement.</p>
+                        <a href="https://avdanse.no/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                </div>
+                <div class="work">
+                    <img src="Images/img2.jpg" alt="Tennis Connect project">
+                    <div class="layer">
+                        <h3>Tennis Connect</h3>
+                        <p>An online platform by Tennis Australia for managing tennis clubs, coaches, associations, and players across the country.</p>
+                        <a href="https://tc.tennis.com.au/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                </div>
+                <div class="work">
+                    <img src="Images/img3.jpg" alt="Oil Spill Simulation project">
+                    <div class="layer">
+                        <h3>Oil Spill Simulation</h3>
+                        <p>This project simulates the movement of an oil spill, evaluating the impact on fishing grounds for mitigation strategies.</p>
+                        <a href="https://github.com/Srivatsav1298/INF202_Project" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- -------------------Contact Section-------------------------------- -->
+    <div id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="contact-left">
+                    <h1 class="sub-title">Contact Me</h1>
+                    <p><i class="fa-solid fa-paper-plane"></i> srivatsavs98@gmail.com</p>
+                    <p><i class="fa-solid fa-square-phone"></i> +47 96705697</p>
+                    <div class="social-icons">
+                        <a href="https://www.linkedin.com/in/srivatsav-s/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i></a>
+                    </div>
+                    <a href="Images/my-cv.pdf" class="btn btn2" download>Download CV</a>
+                </div>
+                <div class="contact-right">
+                    <form name="submit-to-google-sheet">
+                        <input type="text" name="Name" placeholder="Your Name" required>
+                        <input type="email" name="Email" placeholder="Your EmailId" required>
+                        <textarea name="Message" rows="6" placeholder="Your Message"></textarea>
+                        <button type="submit" class="btn btn2">Submit</button>
+                    </form>
+                    <span id="msg"></span>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>Copyright © Srivatsav.</p>
+        </div>
+    </div>
+<script>
+    var sidemenu = document.getElementById("sidemenu");
+    function openmenu(){
+        sidemenu.style.right = "0";
+    }
+    function closemenu(){
+        sidemenu.style.right = "-200px";
+    }
+</script>
+<script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzQygQNVZDle149QIljVSgs_kQZTmG6n5AjMJtDauBlfZ-MxO-6rFaJVoaUYeRp2G8-/exec'
+    const form = document.forms['submit-to-google-sheet']
+    const msg = document.getElementById("msg")
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+        fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+          .then(response => {
+            msg.innerHTML = "Message sent successfully";
+            setTimeout(function () {
+                msg.innerHTML = "";
+            }, 5000);
+            form.reset();
+          })
+          .catch(error => console.error('Error!', error.message));
+     });     
+</script>
+<script>
+var tablinks = document.getElementsByClassName("tab-links")
+var tabcontents = document.getElementsByClassName("tab-contents")
+
+function opentab(tabname){
+    for(tablink of tablinks){
+        tablink.classList.remove("active-link"); //removes the redlines under each tab of about page
+    }
+    for(tabcontent of tabcontents){
+        tabcontent.classList.remove("active-tab"); //removes the contents under each tab of about page
+    }
+    event.currentTarget.classList.add("active-link") // displays the red line under each tab of about page
+    document.getElementById(tabname).classList.add("active-tab") //displays the contents under each tab of about page
+}
+</script>
+</body>
+</html>
