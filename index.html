@@ -16,10 +16,6 @@
     <div id="sigil-container"></div>
 
     <div id="tech-grid-overlay"></div>
-    <div class="metadata-tokens t-left" id="meta-status">SYS: OK</div>
-    <div class="metadata-tokens t-right" id="meta-ver">VER: 2.5</div>
-    <div class="metadata-tokens b-left" id="meta-loc">LOC: 59.91N</div>
-    <div class="metadata-tokens b-right" id="meta-infra">INFRA: STABLE</div>
 
     <div id="shadow-stalker"></div>
     <div id="jumpscare-overlay"></div>
@@ -31,29 +27,35 @@
     <div id="transition-overlay"></div>
 
     <div id="header">
-        <nav class="sticky-nav">
-            <div class="container nav-content">
-                <img src="Images/Logo.png" class="logo" alt="Logo">
+        <header class="top-bar">
+            <div class="logo-container">
+                <img src="Images/Logo.png" class="nav-logo" alt="Logo">
+            </div>
+            <div class="status-pill">
+                <span class="status-dot"></span>
+                <span class="status-text">Available for 3 projects</span>
+            </div>
+        </header>
+
+        <nav class="right-sidebar">
+            <div class="sidebar-track">
                 <ul id="sidemenu">
-                    <li><a href="#header">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#services">Work</a></li>
-                    <li><a href="#portfolio">Projects</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                    <i class="fas fa-times" onclick="closemenu()" aria-label="Close menu"></i>
+                    <li class="nav-item active"><a href="#header"><i class="fas fa-home"></i></a></li>
+                    <li class="nav-item"><a href="#about"><i class="fas fa-user-astronaut"></i></a></li>
+                    <li class="nav-item"><a href="#services"><i class="fas fa-briefcase"></i></a></li>
+                    <li class="nav-item"><a href="#portfolio"><i class="fas fa-layer-group"></i></a></li>
+                    <li class="nav-item"><a href="#contact"><i class="fas fa-paper-plane"></i></a></li>
                 </ul>
-                <div class="nav-extra">
-                    <div id="theme-toggle" onclick="toggleTheme()" title="Toggle Mode">
-                        <i class="fas fa-moon" id="toggle-icon"></i>
-                    </div>
-                    <i class="fas fa-bars" onclick="openmenu()" aria-label="Open menu"></i>
-                </div>
+            </div>
+
+            <div id="theme-toggle" onclick="toggleTheme()" title="Toggle Mode" class="sidebar-theme-toggle">
+                <i class="fas fa-moon" id="toggle-icon"></i>
             </div>
         </nav>
 
         <div class="madison-full-screen">
-            <div class="madison-hey">Hey</div>
-            <div class="madison-there">there</div>
+            <div class="madison-fluid-bg"></div>
+            <div class="madison-geometric-overlay"></div>
 
             <div class="madison-portrait-container">
                 <img src="Images/user.png" alt="Srivatsav's image" id="madison-portrait">
@@ -62,8 +64,12 @@
             <div class="madison-overlay-content container">
                 <div class="madison-left-column">
                     <div class="madison-name-block">
-                        <span class="iam-text">I AM</span>
-                        <h1 id="madison-name-main">Srivatsav Saravanan</h1>
+                        <div class="iam-text">I AM</div>
+                        <h1 id="madison-name-main">SRIVATSAV<br>SARAVANAN</h1>
+                    </div>
+                    <div class="madison-hero-ctas">
+                        <a href="#about" class="btn btn-glossy">Get Started Now</a>
+                        <a href="#portfolio" class="btn btn-glossy btn-glossy-secondary">See Projects</a>
                     </div>
                 </div>
 
@@ -114,9 +120,36 @@
                     </div>
                     <div class="tab-contents active-tab" id="skills">
                         <ul>
-                            <li><span>ENGINEERING</span><br>Python, JavaScript, HTML/CSS</li>
-                            <li><span>INTELLIGENCE</span><br>SQL Server, PostgreSQL, Data Analysis</li>
-                            <li><span>INFRASTRUCTURE</span><br>AWS, Git, GitHub</li>
+                            <li>
+                                <div class="skill-info">
+                                    <i class="fa-brands fa-python"></i>
+                                    <span>ENGINEERING</span>
+                                </div>
+                                <div class="skill-bar-container">
+                                    <div class="skill-bar" style="width: 90%;"></div>
+                                </div>
+                                <p>Python, JavaScript, HTML/CSS</p>
+                            </li>
+                            <li>
+                                <div class="skill-info">
+                                    <i class="fa-solid fa-database"></i>
+                                    <span>INTELLIGENCE</span>
+                                </div>
+                                <div class="skill-bar-container">
+                                    <div class="skill-bar" style="width: 85%;"></div>
+                                </div>
+                                <p>SQL Server, PostgreSQL, Data Analysis</p>
+                            </li>
+                            <li>
+                                <div class="skill-info">
+                                    <i class="fa-solid fa-cloud"></i>
+                                    <span>INFRASTRUCTURE</span>
+                                </div>
+                                <div class="skill-bar-container">
+                                    <div class="skill-bar" style="width: 80%;"></div>
+                                </div>
+                                <p>AWS, Git, GitHub</p>
+                            </li>
                         </ul>
                     </div>
                     <div class="tab-contents" id="experience">

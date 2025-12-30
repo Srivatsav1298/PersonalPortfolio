@@ -246,10 +246,13 @@ function initObserver() {
                     const isMystic = document.body.classList.contains('mystic-mode');
                     const fx = new TextScramble(title);
                     fx.setText(title.innerText, isMystic);
-                    title.dataset.scrambled = true;
+                    title.dataset.scrambled = "true";
                 }
-
-                observer.unobserve(entry.target);
+            } else {
+                // Re-trigger on scroll back
+                entry.target.classList.remove('active');
+                const title = entry.target.querySelector('.section-title');
+                if (title) title.dataset.scrambled = "";
             }
         });
     }, observerOptions);
@@ -547,28 +550,70 @@ function initMadisonRoleCycler() {
     }, 6000);
 }
 
-// --- Initialize All ---
+// --- Madison Name Drip (Sequential Reveal) ---
+function initMadisonNameDrip() {
+    const el = document.getElementById('madison-name-main');
+    if (!el) return;
+
+    const text = el.innerText.trim();
+    el.innerHTML = '';
+
+    const words = text.split(' ');
+    let charIndex = 0;
+
+    words.forEach((word, wIdx) => {
+        [...word].forEach((char) => {
+            const span = document.createElement('span');
+            span.textContent = char;
+            span.className = 'madison-drip-char';
+            span.style.animationDelay = `${charIndex * 0.08}s`;
+            el.appendChild(span);
+            charIndex++;
+        });
+
+        if (wIdx < words.length - 1) {
+            // Force a break for the two-line layout
+            const br = document.createElement('div');
+            br.className = 'madison-drip-break';
+            el.appendChild(br);
+        }
+    });
+}
+
+// --- Scroll Spy for Sidebar ---
+function initScrollSpy() {
+    const sections = document.querySelectorAll('section, div[id]');
+    const navItems = document.querySelectorAll('.nav-item');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navItems.forEach(li => {
+            li.classList.remove('active');
+            const link = li.querySelector('a');
+            if (link && link.getAttribute('href').includes(current)) {
+                li.classList.add('active');
+            }
+        });
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     initCursor();
     initParticles();
     initObserver();
     initNightmareEngine();
-    initMetadataEngine();
+    // initMetadataEngine(); // Disabled for Madison decluttering
     initMadisonRoleCycler();
-
-    // Navbar Scroll Effect
-    window.addEventListener('scroll', () => {
-        const nav = document.querySelector('.sticky-nav');
-        if (nav) {
-            if (window.scrollY > 50) {
-                nav.style.padding = '10px 0';
-                nav.style.background = 'rgba(0, 0, 0, 0.9)';
-            } else {
-                nav.style.padding = '15px 0';
-                nav.style.background = 'rgba(0, 0, 0, 0.8)';
-            }
-        }
-    });
+    initMadisonNameDrip();
+    initScrollSpy();
 
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'mystic') {
@@ -578,6 +623,33 @@ document.addEventListener('DOMContentLoaded', () => {
         if (icon) icon.classList.replace('fa-moon', 'fa-fire-alt');
         updateContent('mystic');
     }
+
+    // --- Parallax Effect ---
+    window.addEventListener('scroll', () => {
+        if (!document.body.classList.contains('premium-mode')) return;
+        const portrait = document.getElementById('madison-portrait');
+        if (portrait) {
+            const scroll = window.pageYOffset;
+            portrait.parentElement.style.transform = `translateX(-50%) translateY(${scroll * 0.1}px)`;
+        }
+    });
+
+    // --- Superpowers Observer ---
+    const skillBars = document.querySelectorAll('.skill-bar');
+    const skillObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const bar = entry.target;
+                const width = bar.parentElement.nextElementSibling ? bar.parentElement.style.width : bar.style.getPropertyValue('width');
+                // We'll use a data attribute or inline style set in HTML
+                const targetWidth = bar.getAttribute('style').match(/width:\s*(\d+)%/)[1];
+                bar.style.width = targetWidth + '%';
+                skillObserver.unobserve(bar);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    skillBars.forEach(bar => skillObserver.observe(bar));
 });
 
 // --- Tab Management ---
@@ -591,15 +663,4 @@ function opentab(event, tabname) {
     event.currentTarget.classList.add("active-link");
     const targetTab = document.getElementById(tabname);
     if (targetTab) targetTab.classList.add("active-tab");
-}
-
-// --- Menu Management ---
-function openmenu() {
-    const sidemenu = document.getElementById("sidemenu");
-    if (sidemenu) sidemenu.style.right = "0";
-}
-
-function closemenu() {
-    const sidemenu = document.getElementById("sidemenu");
-    if (sidemenu) sidemenu.style.right = "-200px";
 }
