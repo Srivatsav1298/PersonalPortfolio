@@ -2,10 +2,15 @@
 const contentMap = {
     premium: {
         statusText: "System Architect. Production Systems. Horizontally Scalable.",
-        heroTagline: "An Engineer building solutions for real-world impact.",
-        heroTitle: "Srivatsav.",
-        aboutTitle: "Systems Architecture <br>& Deep Data Strategy.",
-        aboutText: "I architect high-availability systems and data pipelines for production environments. My work focuses on distributed intelligence and sovereign infrastructure, delivering impact through principled engineering and disciplined trade-offs.",
+        heroGreeting: "Hey, there",
+        heroName: "Srivatsav Saravanan",
+        heroRoles: [
+            "A software architect with a passion for building smarter, faster, and scalable software.",
+            "A problem solver specializing in AI solutions and advanced backend lattices.",
+            "An engineer who believes code should be smart and occasionally eats too much chocolate."
+        ],
+        aboutTitle: "One human. <br>Many lines of code.",
+        aboutText: "I'm a Software Engineer with 3+ years of experience turning complex problems into elegant digital realities. Currently, I'm deep-diving into a Master's in Data Science because I believe code should be smart, and data should have a personality.",
         servicesTitle: "Core Competencies.",
         service1Title: "Distributed Intelligence",
         service1Text: "Implementing agentic backend architectures that self-regulate and scale under production loads.",
@@ -15,10 +20,11 @@ const contentMap = {
         contactTitle: "Initiate Outreach.",
         footerText: "&copy; 2025 Srivatsav. Architecting Scale. Engineering Trust. Code that thinks. Data that speaks.",
         tab1: "Superpowers",
-        tab2: "History",
-        tab3: "Learning",
-        submitBtn: "Submit Inquiry",
-        cvBtn: "Download CV"
+        tab2: "What I’ve Done",
+        tab3: "How Did I Get Here?",
+        submitBtn: "Contact Me",
+        cvBtn: "Download CV",
+        heroCTA: "Let's make something great"
     },
     mystic: {
         statusText: "",
@@ -38,7 +44,8 @@ const contentMap = {
         tab2: "Field Work",
         tab3: "The Initiation",
         submitBtn: "Send a Whisper",
-        cvBtn: "Claim the Grimoire"
+        cvBtn: "Claim the Grimoire",
+        heroCTA: "View Echoes"
     }
 };
 
@@ -349,8 +356,25 @@ function updateContent(mode) {
     if (submitBtn) submitBtn.textContent = theme.submitBtn;
 
     // Update CV Button
+    // Update Madison Hero Elements
+    const madisonBgGreeting = document.getElementById('madison-bg-greeting');
+    const madisonName = document.getElementById('madison-name-main');
+    const chocolateRole = document.getElementById('madison-chocolate-role');
+
+    if (madisonBgGreeting) madisonBgGreeting.textContent = theme.heroGreeting || "Hey, there";
+    if (madisonName) madisonName.textContent = theme.heroName || "Srivatsav Saravanan";
+
+    // Initial wrap for chocolate drops
+    if (chocolateRole && theme.heroRoles && theme.heroRoles.length > 0) {
+        wrapChocolateLetters(chocolateRole, theme.heroRoles[0]);
+    }
+
     const cvBtn = document.getElementById('cv-btn');
     if (cvBtn) cvBtn.textContent = theme.cvBtn;
+
+    // Update Hero CTA
+    const heroBtn = document.querySelector('.hero-cta .btn');
+    if (heroBtn) heroBtn.textContent = theme.heroCTA || "View Work";
 
     const serviceCards = document.querySelectorAll('.service-card');
     if (serviceCards.length >= 2) {
@@ -472,14 +496,65 @@ function initMetadataEngine() {
     }, 2000);
 }
 
+// --- Madison Interactive Engine ---
+function wrapChocolateLetters(el, text) {
+    if (!el) return;
+    el.innerHTML = '';
+    const words = text.split(' ');
+
+    words.forEach((word, wordIdx) => {
+        const wordSpan = document.createElement('span');
+        wordSpan.style.whiteSpace = 'nowrap';
+        wordSpan.style.display = 'inline-block';
+
+        [...word].forEach((char, charIdx) => {
+            const span = document.createElement('span');
+            span.textContent = char;
+            span.className = 'chocolate-char';
+            span.style.animationDelay = `${(wordIdx * 0.1) + (charIdx * 0.03)}s`;
+            wordSpan.appendChild(span);
+        });
+
+        el.appendChild(wordSpan);
+        if (wordIdx < words.length - 1) {
+            el.appendChild(document.createTextNode(' '));
+        }
+    });
+}
+
+function initMadisonRoleCycler() {
+    const target = document.getElementById('madison-chocolate-role');
+    if (!target) return;
+
+    const roles = contentMap.premium.heroRoles;
+    let index = 0;
+
+    setInterval(() => {
+        if (!document.body.classList.contains('premium-mode')) return;
+
+        // Staggered exit
+        const spans = target.querySelectorAll('.chocolate-char');
+        spans.forEach((s, i) => {
+            s.style.transition = 'all 0.5s ease';
+            s.style.opacity = '0';
+            s.style.transform = 'translateY(20px)';
+        });
+
+        setTimeout(() => {
+            index = (index + 1) % roles.length;
+            wrapChocolateLetters(target, roles[index]);
+        }, 600);
+    }, 6000);
+}
+
 // --- Initialize All ---
 document.addEventListener('DOMContentLoaded', () => {
     initCursor();
     initParticles();
     initObserver();
     initNightmareEngine();
-    initGhostlyRotator();
     initMetadataEngine();
+    initMadisonRoleCycler();
 
     // Navbar Scroll Effect
     window.addEventListener('scroll', () => {

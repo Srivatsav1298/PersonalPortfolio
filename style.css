@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cinzel:wght@400;700&family=Crimson+Pro:wght@300;400;600&family=Eater&family=Creepster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;700&family=Crimson+Pro:wght@300;400;600&family=Eater&family=Creepster&display=swap');
 
 :root {
     /* Mode-1: Systems Architect (Apple-Tech Overhaul) */
@@ -834,7 +834,9 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-    color: var(--text-primary);
+    color: #00ffd2;
+    /* Neon Teal */
+    text-shadow: 0 0 10px rgba(0, 255, 210, 0.5);
 }
 
 .nav-extra {
@@ -862,78 +864,528 @@ nav ul li a:hover {
     transform: scale(1.1);
 }
 
-/* --- Hero Section --- */
-#header {
-    height: 100vh;
+/* --- Madison Full-Screen Hero --- */
+/* --- Madison Full-Screen Hero --- */
+.madison-full-screen {
+    display: none;
     width: 100%;
+    height: 100vh;
     position: relative;
+    background: radial-gradient(circle at center, #111 0%, #000 100%);
     overflow: hidden;
+    color: #fff;
+}
+
+body.premium-mode .madison-full-screen {
     display: flex;
-    flex-direction: column;
-    background-color: var(--bg-color);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    transition: background-image var(--transition-theme), background-color var(--transition-theme);
 }
 
-body.mystic-mode #header {
-    background-color: var(--bg-color);
-    background-image: none;
+.madison-hey,
+.madison-there {
+    position: absolute;
+    top: 15vh;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(80px, 15vw, 180px);
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.03);
+    z-index: 1;
+    white-space: nowrap;
+    letter-spacing: -2px;
 }
 
-.header-text {
-    margin-top: 25vh;
-    flex-grow: 1;
+.madison-hey {
+    left: 5%;
+}
+
+.madison-there {
+    right: 5%;
+}
+
+.madison-portrait-container {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 35%;
+    height: 95%;
+    z-index: 2;
+    mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+/* Cinematic Vignette Overlay */
+.madison-portrait-container::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, transparent 30%, rgba(0, 0, 0, 0.4) 100%);
+    pointer-events: none;
+}
+
+.madison-portrait-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 15%;
+    /* Better facial centering */
+    filter: blur(4px) grayscale(100%) contrast(1.1) brightness(0.7);
+}
+
+.madison-overlay-content {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    pointer-events: none;
+    padding: 0 5%;
+}
+
+.madison-left-column,
+.madison-right-column {
+    pointer-events: auto;
+}
+
+.madison-left-column {
+    flex-basis: 32%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    max-width: 900px;
+    align-items: flex-start;
 }
 
-.positioning-statement {
-    font-size: clamp(18px, 3vw, 24px);
-    color: var(--text-secondary);
-    margin-bottom: 40px;
-    font-weight: 300;
-    line-height: 1.5;
-    letter-spacing: 0.5px;
-}
-
-.philosophical-slogan {
-    font-size: 14px;
-    color: var(--text-secondary);
-    margin-top: 30px;
-    letter-spacing: 1px;
+.madison-badge {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 8px 18px;
+    border-radius: 30px;
+    font-size: 10px;
+    font-weight: 500;
     text-transform: uppercase;
-    font-weight: 400;
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    width: fit-content;
+    margin-bottom: 60px;
+    /* More space from header */
+    color: #aaa;
 }
 
-.header-text h1 {
-    font-size: clamp(50px, 10vw, 120px);
-    line-height: 1.0;
-    font-weight: 700;
-    margin-bottom: 20px;
-    color: #fff;
-    filter: none !important;
-    position: relative;
-    z-index: 10;
+.orange-dot {
+    width: 6px;
+    height: 6px;
+    background: #ff5f00;
+    border-radius: 50%;
+    box-shadow: 0 0 12px #ff5f00;
 }
 
-body.mystic-mode .header-text h1 {
-    z-index: 20;
-    /* Ensure it stays above other spectral elements */
-}
-
-body.mystic-mode .header-text h1 span {
+.iam-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 60px;
+    font-weight: 500;
+    /* Subtler weight */
+    line-height: 0.8;
     display: block;
-    font-size: 0.4em;
+    color: #fff;
+    text-align: left;
+    letter-spacing: 2px;
+    opacity: 0.6;
+    /* Subtler opacity */
+}
+
+#madison-name-main {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(60px, 8vw, 120px);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -3px;
+    margin-bottom: 0;
+    text-align: left;
+
+    /* Chocolate Filling Effect */
+    background: linear-gradient(90deg,
+            #6b4f2b 0%,
+            #8b5a2b 40%,
+            #f2f2f2 50%,
+            #8b5a2b 60%,
+            #6b4f2b 100%);
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
+
+    animation: chocolate-fill 4s ease-in-out forwards;
+}
+
+@keyframes chocolate-fill {
+    0% {
+        background-position: 200% center;
+        -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
+    }
+
+    100% {
+        background-position: 0% center;
+        -webkit-text-stroke: 0px transparent;
+    }
+}
+
+.madison-right-column {
+    flex-basis: 32%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.chocolate-drop-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    /* Slightly smaller */
+    font-weight: 300;
+    /* Thinner */
+    line-height: 1.6;
+    text-align: right;
+    text-transform: uppercase;
+    color: #bbb;
+    /* Subtler gray */
+    max-width: 320px;
+    letter-spacing: 1px;
     opacity: 0.8;
 }
 
-.hero-cta {
+/* --- Chocolate Drops Animation --- */
+.chocolate-char {
+    display: inline-block;
+    position: relative;
+    animation: chocolate-drip 1.2s cubic-bezier(0.6, 0, 0.4, 1) forwards;
+    opacity: 0;
+    transform: translateY(-20px);
+}
+
+@keyframes chocolate-drip {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px) scaleY(1.5);
+    }
+
+    40% {
+        opacity: 1;
+        transform: translateY(5px) scaleY(0.8);
+    }
+
+    70% {
+        transform: translateY(-2px) scaleY(1.1);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scaleY(1);
+        color: #f0f0f0;
+        /* Pearl Silver Drop */
+        text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+}
+
+.madison-scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: rgba(255, 255, 255, 0.2);
+    z-index: 4;
+}
+
+/* Mobile Responsiveness for Madison Hero */
+@media (max-width: 992px) {
+    .madison-overlay-content {
+        flex-direction: column;
+        justify-content: center;
+        gap: 40px;
+        padding: 50px 5%;
+        text-align: center;
+    }
+
+    .madison-left-column,
+    .madison-right-column {
+        flex-basis: auto;
+        align-items: center;
+        width: 100%;
+    }
+
+    .madison-portrait-container {
+        width: 70%;
+        height: 50%;
+        bottom: 20%;
+    }
+
+    .chocolate-drop-text {
+        text-align: center;
+        max-width: 100%;
+    }
+
+    #madison-name-main {
+        font-size: clamp(40px, 12vw, 80px);
+    }
+
+    .iam-text {
+        font-size: 40px;
+    }
+}
+
+/* --- About Section Refinement (Mode-1) --- */
+body.premium-mode .about-col-1 {
+    display: none;
+}
+
+body.premium-mode .about-col-2 {
+    flex-basis: 100%;
+}
+
+/* --- Mode-2 Visibility Refinement --- */
+body.mystic-mode .madison-full-screen {
+    display: none;
+}
+
+/* --- Cinematic Laptop & Madison Hero --- */
+.laptop-container {
+    display: none;
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    perspective: 2000px;
+    background: radial-gradient(circle at center, #111 0%, #000 70%);
+    overflow: hidden;
+}
+
+body.premium-mode .laptop-container {
+    display: flex;
+}
+
+.laptop-wrapper {
+    position: relative;
+    width: 800px;
+    height: 520px;
+    transform-style: preserve-3d;
+    transition: transform 1.5s var(--transition-smooth);
+}
+
+.laptop-lid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 600px;
+    height: 380px;
+    background: #222;
+    border-radius: 12px 12px 0 0;
+    transform-origin: bottom;
+    transform: rotateX(0deg);
+    /* Start closed, animate to -110deg */
+    transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 2;
+    left: 50%;
+    margin-left: -300px;
+    border: 2px solid #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.laptop-lid.open {
+    transform: rotateX(-110deg);
+}
+
+.laptop-screen {
+    width: 96%;
+    height: 94%;
+    background: #000;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: inset 0 0 50px rgba(255, 255, 255, 0.05);
+}
+
+.laptop-base {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    margin-left: -310px;
+    width: 620px;
+    height: 20px;
+    background: linear-gradient(to bottom, #444, #111);
+    border-radius: 4px 4px 12px 12px;
+    z-index: 1;
+}
+
+/* --- D.Nova Layout Inside Screen --- */
+.hero-dnova {
+    width: 100%;
+    height: 100%;
+    background: #f5f5f5;
+    /* Light theme logic like screenshot */
+    display: flex;
+    flex-direction: column;
+    color: #111;
+    font-family: 'Inter', sans-serif;
+    position: relative;
+    overflow: hidden;
+}
+
+.dnova-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    z-index: 10;
+}
+
+.dnova-logo {
+    color: #111;
+    font-weight: 800;
+}
+
+.dnova-nav {
     display: flex;
     gap: 20px;
+}
+
+.dnova-nav a {
+    text-decoration: none;
+    color: #666;
+    font-size: 11px;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.dnova-nav a:hover {
+    color: #111;
+}
+
+.dnova-book {
+    text-decoration: none;
+    color: #111;
+    font-size: 11px;
+    font-weight: 600;
+    border: 1px solid #111;
+    padding: 5px 12px;
+    border-radius: 20px;
+}
+
+.dnova-main {
+    display: flex;
+    flex-grow: 1;
+    position: relative;
+}
+
+.dnova-sidebar {
+    width: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 30px 0;
+    align-items: center;
+    border-right: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.dnova-sidebar span {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-size: 9px;
+    color: #999;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.dnova-body {
+    flex-grow: 1;
+    padding: 40px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 5;
+}
+
+.dnova-stats {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.stat-item h3 {
+    font-size: 28px;
+    font-weight: 400;
+    margin-bottom: 5px;
+}
+
+.stat-item p {
+    font-size: 9px;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.dnova-hero-text h1 {
+    font-size: 100px;
+    font-weight: 400;
+    line-height: 0.8;
+    margin-bottom: 20px;
+    letter-spacing: -3px;
+    color: #111 !important;
+}
+
+.dnova-hero-text p {
+    font-size: 12px;
+    color: #666;
+    letter-spacing: 0.5px;
+}
+
+.dnova-footer-nav {
+    margin-top: 50px;
+}
+
+.dnova-footer-nav a {
+    text-decoration: none;
+    color: #111;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.dnova-profile {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 45%;
+    height: 100%;
+    z-index: 1;
+}
+
+.dnova-profile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%);
+    opacity: 0.9;
+}
+
+/* --- Mystic Mode Hero --- */
+#mystic-hero {
+    display: none;
+}
+
+body.mystic-mode #mystic-hero {
+    display: flex;
 }
 
 .btn {
@@ -981,11 +1433,13 @@ body.mystic-mode .header-text h1 span {
 }
 
 .about-col-1 {
-    flex-basis: 40%;
+    flex-basis: 35%;
+    /* Slightly smaller for more text space */
 }
 
 .about-col-2 {
-    flex-basis: 55%;
+    flex-basis: 60%;
+    /* More room for the narrative and tabs */
 }
 
 .image-wrapper {
