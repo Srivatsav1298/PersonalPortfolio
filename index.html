@@ -15,74 +15,55 @@
     <div id="blood-screen-overlay"></div>
     <div id="sigil-container"></div>
 
-    <div id="tech-grid-overlay"></div>
-
-    <div id="shadow-stalker"></div>
-    <div id="jumpscare-overlay"></div>
-
-
-
-    <canvas id="particle-canvas"></canvas>
-
-    <div id="transition-overlay"></div>
+    <div class="mesh-gradient"></div>
 
     <div id="header">
-        <header class="top-bar">
-            <div class="logo-container">
-                <img src="Images/Logo.png" class="nav-logo" alt="Logo">
+        <header class="navbar-container">
+            <!-- Left: Signature -->
+            <div class="logo-group elite-signature-box">
+                <span class="elite-signature">SRIVATSAV SARAVANAN</span>
             </div>
-            <div class="status-pill">
-                <span class="status-dot"></span>
-                <span class="status-text">Available for 3 projects</span>
+
+            <!-- Center: Pill Nav -->
+            <nav class="nav-pill">
+                <ul>
+                    <li><a href="#header">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#portfolio">Work</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+
+            <!-- Right: Actions -->
+            <div class="nav-actions">
+                <div id="theme-toggle" onclick="toggleTheme()" title="Toggle Mode" class="nav-theme-toggle">
+                    <i class="fas fa-moon" id="toggle-icon"></i>
+                </div>
             </div>
         </header>
 
-        <nav class="right-sidebar">
-            <div class="sidebar-track">
-                <ul id="sidemenu">
-                    <li class="nav-item active"><a href="#header"><i class="fas fa-home"></i></a></li>
-                    <li class="nav-item"><a href="#about"><i class="fas fa-user-astronaut"></i></a></li>
-                    <li class="nav-item"><a href="#services"><i class="fas fa-briefcase"></i></a></li>
-                    <li class="nav-item"><a href="#portfolio"><i class="fas fa-layer-group"></i></a></li>
-                    <li class="nav-item"><a href="#contact"><i class="fas fa-paper-plane"></i></a></li>
-                </ul>
-            </div>
+        <!-- Sidebar removed as requested -->
 
-            <div id="theme-toggle" onclick="toggleTheme()" title="Toggle Mode" class="sidebar-theme-toggle">
-                <i class="fas fa-moon" id="toggle-icon"></i>
-            </div>
-        </nav>
+        <div class="elite-hero-section" id="madison-hero">
+            <div class="container elite-hero-container">
+                <div class="elite-hero-content">
+                    <span class="elite-eyebrow">SOFTWARE ENGINEERING • DATA • AI</span>
+                    <h1 class="elite-main-heading">Where software, data, <br>and AI meet production.</h1>
 
-        <div class="madison-full-screen">
-            <div class="madison-fluid-bg"></div>
-            <div class="madison-geometric-overlay"></div>
+                    <p class="elite-subheading">
+                        I’m a software engineer focused on building reliable, data-driven systems and applying AI in
+                        practical, production-ready ways.
+                    </p>
 
-            <div class="madison-portrait-container">
-                <img src="Images/user.png" alt="Srivatsav's image" id="madison-portrait">
-            </div>
+                    <p class="elite-supporting-line">
+                        Optimizing for correctness, performance, and long-term reliability.
+                    </p>
 
-            <div class="madison-overlay-content container">
-                <div class="madison-left-column">
-                    <div class="madison-name-block">
-                        <div class="iam-text">I AM</div>
-                        <h1 id="madison-name-main">SRIVATSAV<br>SARAVANAN</h1>
-                    </div>
-                    <div class="madison-hero-ctas">
-                        <a href="#about" class="btn btn-glossy">Get Started Now</a>
-                        <a href="#portfolio" class="btn btn-glossy btn-glossy-secondary">See Projects</a>
+                    <div class="elite-hero-ctas">
+                        <a href="#portfolio" class="btn btn-elite-primary">View Work</a>
+                        <a href="#contact" class="btn btn-elite-ghost">Contact</a>
                     </div>
                 </div>
-
-                <div class="madison-right-column">
-                    <div class="madison-subtitle-wrap">
-                        <h2 id="madison-chocolate-role" class="chocolate-drop-text">A PROBLEM SOLVER WITH A PASSION FOR
-                            BUILDING SMARTER, FASTER, AND SCALABLE SOFTWARE, DATA, AND AI SOLUTIONS.</h2>
-                    </div>
-                </div>
-            </div>
-
-            <div class="madison-scroll-indicator">
-                <span>Scroll down ↓</span>
             </div>
         </div>
 
@@ -99,68 +80,91 @@
 
     <!-- -------------------about-------------------------------- -->
     <div id="about" class="reveal">
-        <div class="container">
-            <div class="row about-row">
-                <div class="about-col-1">
-                    <div class="image-wrapper">
-                        <img src="Images/user.png" alt="Srivatsav's image">
-                    </div>
-                </div>
-                <div class="about-col-2">
-                    <h2 class="section-title">One human. <br>Many lines of code.</h2>
-                    <p class="about-text">
-                        I'm a Software Engineer with 3+ years of experience turning complex problems into elegant
-                        digital realities. Currently, I'm deep-diving into a Master's in Data Science because I believe
-                        code should be smart, and data should have a personality.
-                    </p>
+        <div class="container about-container">
+            <div class="about-hero">
+                <h2 class="section-title centered-title">One human. <br>Many lines of code.</h2>
+                <p class="about-text-hero">
+                    I'm a Software Engineer with 3+ years of experience turning complex problems into elegant
+                    digital realities. Currently, I'm deep-diving into a Master's in Data Science because I believe
+                    code should be smart, and data should have a personality.
+                </p>
+            </div>
+
+            <div class="about-content-wrapper">
+                <div class="tab-titles-wrapper">
                     <div class="tab-titles">
-                        <p class="tab-links active-link" onclick="opentab(event, 'skills')">Superpowers</p>
+                        <p class="tab-links active-link" onclick="opentab(event, 'skills')">SKILLS</p>
                         <p class="tab-links" onclick="opentab(event, 'experience')">What I’ve Done</p>
                         <p class="tab-links" onclick="opentab(event, 'education')">How Did I Get Here?</p>
                     </div>
-                    <div class="tab-contents active-tab" id="skills">
-                        <ul>
+                </div>
+
+                <div class="tab-contents active-tab" id="skills">
+                    <div class="skills-grid">
+                        <div class="skill-card glass-card">
+                            <div class="skill-icon-box">
+                                <i class="fa-brands fa-python"></i>
+                            </div>
+                            <h3>ENGINEERING</h3>
+                            <div class="skill-bar-container">
+                                <div class="skill-bar" style="width: 90%;"></div>
+                            </div>
+                            <p>Python, JavaScript, HTML/CSS</p>
+                        </div>
+                        <div class="skill-card glass-card">
+                            <div class="skill-icon-box">
+                                <i class="fa-solid fa-database"></i>
+                            </div>
+                            <h3>INTELLIGENCE</h3>
+                            <div class="skill-bar-container">
+                                <div class="skill-bar" style="width: 85%;"></div>
+                            </div>
+                            <p>SQL Server, PostgreSQL, Data Analysis</p>
+                        </div>
+                        <div class="skill-card glass-card">
+                            <div class="skill-icon-box">
+                                <i class="fa-solid fa-cloud"></i>
+                            </div>
+                            <h3>INFRASTRUCTURE</h3>
+                            <div class="skill-bar-container">
+                                <div class="skill-bar" style="width: 80%;"></div>
+                            </div>
+                            <p>AWS, Git, GitHub</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-contents" id="experience">
+                    <div class="timeline-container glass-card">
+                        <ul class="timeline-list">
                             <li>
-                                <div class="skill-info">
-                                    <i class="fa-brands fa-python"></i>
-                                    <span>ENGINEERING</span>
+                                <span class="timeline-date">2020 - 2024</span>
+                                <div class="timeline-content">
+                                    <h4>Software Engineer</h4>
+                                    <p>Orion Innovation</p>
                                 </div>
-                                <div class="skill-bar-container">
-                                    <div class="skill-bar" style="width: 90%;"></div>
-                                </div>
-                                <p>Python, JavaScript, HTML/CSS</p>
-                            </li>
-                            <li>
-                                <div class="skill-info">
-                                    <i class="fa-solid fa-database"></i>
-                                    <span>INTELLIGENCE</span>
-                                </div>
-                                <div class="skill-bar-container">
-                                    <div class="skill-bar" style="width: 85%;"></div>
-                                </div>
-                                <p>SQL Server, PostgreSQL, Data Analysis</p>
-                            </li>
-                            <li>
-                                <div class="skill-info">
-                                    <i class="fa-solid fa-cloud"></i>
-                                    <span>INFRASTRUCTURE</span>
-                                </div>
-                                <div class="skill-bar-container">
-                                    <div class="skill-bar" style="width: 80%;"></div>
-                                </div>
-                                <p>AWS, Git, GitHub</p>
                             </li>
                         </ul>
                     </div>
-                    <div class="tab-contents" id="experience">
-                        <ul>
-                            <li><span>2020 - 2024</span><br>Software Engineer @ Orion Innovation</li>
-                        </ul>
-                    </div>
-                    <div class="tab-contents" id="education">
-                        <ul>
-                            <li><span>2024 - Present</span><br>MSc in Data Science</li>
-                            <li><span>2016 - 2020</span><br>BEng in Computer Science</li>
+                </div>
+
+                <div class="tab-contents" id="education">
+                    <div class="timeline-container glass-card">
+                        <ul class="timeline-list">
+                            <li>
+                                <span class="timeline-date">2024 - Present</span>
+                                <div class="timeline-content">
+                                    <h4>MSc in Data Science</h4>
+                                    <p>Advanced specialization in data engineering and AI.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="timeline-date">2016 - 2020</span>
+                                <div class="timeline-content">
+                                    <h4>BEng in Computer Science</h4>
+                                    <p>Foundation in algorithms, data structures, and systems.</p>
+                                </div>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -189,72 +193,104 @@
 
     <!-- -------------------portfolio-------------------------------- -->
     <div id="portfolio" class="reveal">
-        <div class="container">
-            <h2 class="section-title">Selected Work.</h2>
-            <div class="work-list">
-                <div class="work">
-                    <img src="Images/Proj1.jpg" alt="AV DANSESTUDIO project">
-                    <div class="layer">
-                        <h3>AV DANSESTUDIO</h3>
-                        <p>A digital stage for classical dance. Focused on elegance and engagement.</p>
-                        <a href="https://avdanse.no/" target="_blank" rel="noopener noreferrer">Explore Case Study</a>
+        <div class="container maang-projects-container">
+            <h2 class="maang-section-title section-title">Selected project work</h2>
+            <div class="maang-projects-grid">
+
+                <!-- Project 1: AV DANSESTUDIO -->
+                <article class="maang-project-item">
+                    <div class="project-header">
+                        <span class="project-year">2024</span>
+                        <h3 class="project-name">AV Dansestudio</h3>
                     </div>
-                </div>
-                <div class="work">
-                    <img src="Images/img2.jpg" alt="Tennis Connect project">
-                    <div class="layer">
-                        <h3>Tennis Connect</h3>
-                        <p>Managing the game for Australia. A robust platform for clubs and players.</p>
-                        <a href="https://tc.tennis.com.au/" target="_blank" rel="noopener noreferrer">Explore Case
-                            Study</a>
+                    <p class="project-description">
+                        A digital platform for classical dance, focused on high-fidelity user interactions and seamless
+                        scheduling. Engineered for reliability and a premium aesthetic.
+                    </p>
+                    <div class="project-links">
+                        <a href="https://avdanse.no/" target="_blank" class="text-link">Visit platform</a>
                     </div>
-                </div>
-                <div class="work">
-                    <img src="Images/img3.jpg" alt="Oil Spill Simulation project">
-                    <div class="layer">
-                        <h3>Simulated Impact</h3>
-                        <p>Simulating environmental crises to protect fishing grounds through data.</p>
+                </article>
+
+                <!-- Project 2: Tennis Connect -->
+                <article class="maang-project-item">
+                    <div class="project-header">
+                        <span class="project-year">2023</span>
+                        <h3 class="project-name">Tennis Connect</h3>
+                    </div>
+                    <p class="project-description">
+                        Scalable infrastructure managing club operations and player registrations across Australia.
+                        Built for peak seasonality and high-concurrency stability.
+                    </p>
+                    <div class="project-links">
+                        <a href="https://tc.tennis.com.au/" target="_blank" class="text-link">View case study</a>
+                    </div>
+                </article>
+
+                <!-- Project 3: Simulated Impact -->
+                <article class="maang-project-item">
+                    <div class="project-header">
+                        <span class="project-year">2022</span>
+                        <h3 class="project-name">Simulated Impact</h3>
+                    </div>
+                    <p class="project-description">
+                        Environmental crisis simulation utilizing predictive modeling for oil spill trajectories.
+                        Optimized for tactical resource deployment and ecological protection.
+                    </p>
+                    <div class="project-links">
                         <a href="https://github.com/Srivatsav1298/INF202_Project" target="_blank"
-                            rel="noopener noreferrer">View Repo</a>
+                            class="text-link">Source repository</a>
                     </div>
-                </div>
+                </article>
+
             </div>
-            <a href="https://github.com/Srivatsav1298" target="_blank" class="btn btn-secondary reveal"
-                style="margin-top: 60px;">See more on GitHub</a>
+
+            <div class="projects-footer">
+                <a href="https://github.com/Srivatsav1298" target="_blank" class="maang-cta-link">Full work on
+                    GitHub</a>
+            </div>
         </div>
     </div>
 
     <!-- -------------------Contact Section-------------------------------- -->
     <div id="contact" class="reveal">
-        <div class="container">
-            <div class="row">
-                <div class="contact-left">
-                    <h2 class="section-title">Let's talk.</h2>
-                    <p class="contact-text">Have a project in mind or just want to chat about the future of data? Reach
-                        out.</p>
-                    <div class="contact-info">
-                        <p>srivatsavs98@gmail.com</p>
-                        <p>+47 96705697</p>
-                    </div>
-                    <div class="social-icons">
-                        <a href="https://www.linkedin.com/in/srivatsav-s/" target="_blank" rel="noopener noreferrer"><i
-                                class="fa-brands fa-linkedin"></i></a>
-                    </div>
-                    <a href="Images/my-cv.pdf" class="btn btn-primary" id="cv-btn" download>Download CV</a>
-                </div>
-                <div class="contact-right">
-                    <form name="submit-to-google-sheet">
-                        <input type="text" name="Name" placeholder="Your Name" required>
-                        <input type="email" name="Email" placeholder="Your Email" required>
-                        <textarea name="Message" rows="6" placeholder="Your Message"></textarea>
-                        <button type="submit" class="btn btn-primary">Submit Inquiry</button>
+        <div class="container maang-contact-container">
+            <div class="maang-contact-content">
+                <header class="maang-contact-header">
+                    <h2 class="maang-contact-title section-title">Let’s talk about interesting problems.</h2>
+                    <p class="maang-contact-supporting">
+                        If you’re working on data-heavy software or AI-powered systems where reliability matters, I’d be
+                        glad to connect.
+                    </p>
+                </header>
+
+                <div class="maang-contact-form-box">
+                    <form name="submit-to-google-sheet" class="maang-minimal-form">
+                        <div class="maang-input-group">
+                            <label for="maang-name">Name</label>
+                            <input type="text" id="maang-name" name="Name" placeholder="Name" required>
+                        </div>
+                        <div class="maang-input-group">
+                            <label for="maang-email">Email</label>
+                            <input type="email" id="maang-email" name="Email" placeholder="Email" required>
+                        </div>
+                        <div class="maang-input-group">
+                            <label for="maang-message">Message</label>
+                            <textarea id="maang-message" name="Message" rows="5"
+                                placeholder="What are you building or exploring?" required></textarea>
+                        </div>
+                        <button type="submit" class="maang-submit-btn">Send message</button>
                     </form>
-                    <span id="msg"></span>
+                    <p class="maang-footer-microcopy">
+                        I read every message and respond when there’s a meaningful overlap.
+                    </p>
                 </div>
+                <span id="msg"></span>
             </div>
         </div>
-        <div class="copyright">
-            <p>&copy; 2025 Srivatsav. Built with precision and a touch of wit.</p>
+
+        <div class="maang-footer-copyright">
+            <p>&copy; 2025 Srivatsav Saravanan. Professional Portfolio.</p>
         </div>
     </div>
     <script src="Scripts/Index.js"></script>

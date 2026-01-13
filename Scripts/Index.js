@@ -664,3 +664,115 @@ function opentab(event, tabname) {
     const targetTab = document.getElementById(tabname);
     if (targetTab) targetTab.classList.add("active-tab");
 }
+
+// --- Mode-2 Horror Interaction ---
+document.addEventListener('click', (e) => {
+    if (!document.body.classList.contains('mystic-mode')) return;
+
+    // Trigger on any click on the page for maximum effect, or limit to buttons
+    // User asked for "click any buttons", but global click is more "fun". let's stick to buttons + general if empty.
+    if (e.target.closest('.btn') || e.target.closest('.btn-glossy') || e.target.closest('a')) {
+        createHorrorEffect(e.pageX, e.pageY);
+    }
+});
+
+function createHorrorEffect(x, y) {
+    // 50% chance of Ghost Fly-out, 50% Blood Drip
+    const isGhost = Math.random() > 0.5;
+
+    if (isGhost) {
+        const ghost = document.createElement('div');
+        ghost.innerText = '👻';
+        ghost.style.position = 'absolute';
+        ghost.style.left = `${x}px`;
+        ghost.style.top = `${y}px`;
+        ghost.style.fontSize = '24px';
+        ghost.style.pointerEvents = 'none';
+        ghost.style.transition = 'all 1s ease-out';
+        ghost.style.zIndex = '10000';
+        ghost.style.opacity = '1';
+        document.body.appendChild(ghost);
+
+        requestAnimationFrame(() => {
+            ghost.style.transform = `translate(${Math.random() * 100 - 50}px, -100px) scale(1.5)`;
+            ghost.style.opacity = '0';
+        });
+
+        setTimeout(() => ghost.remove(), 1000);
+    } else {
+        // Blood Drip
+        for (let i = 0; i < 3; i++) {
+            const drop = document.createElement('div');
+            drop.classList.add('blood-drip');
+            drop.style.left = `${x + (Math.random() * 20 - 10)}px`;
+            drop.style.top = `${y}px`;
+            document.body.appendChild(drop);
+            setTimeout(() => drop.remove(), 1000);
+        }
+    }
+}
+
+// --- Ghost Text Rotator (Mode-2) ---
+class GhostRotator {
+    constructor(el) {
+        this.el = el;
+        this.phrases = [
+            "To Code from the Shadows",
+            "Crafting dark-themed experiences",
+            "Turning nightmares into neat logic",
+            "Summoning clean code from chaos",
+            "To Code from the Shadows",
+            "Hearing real ghost-stories",
+            "Building eerie yet elegant systems",
+            "Debugging haunted codebases"
+        ];
+        this.currentIdx = 0;
+        this.scramble = new TextScramble(this.el);
+        this.interval = null;
+    }
+
+    start() {
+        if (this.interval) return;
+        this.interval = setInterval(() => {
+            if (!document.body.classList.contains('mystic-mode')) return;
+
+            this.currentIdx = (this.currentIdx + 1) % this.phrases.length;
+            this.scramble.setText(this.phrases[this.currentIdx], true); // true for horror glitch
+        }, 4000); // Rotate every 4 seconds
+    }
+
+    stop() {
+        clearInterval(this.interval);
+        this.interval = null;
+    }
+}
+
+// Initialize Rotator
+let ghostRotator;
+
+function updateRotatorState() {
+    const isMystic = document.body.classList.contains('mystic-mode');
+    const ghostlyEl = document.getElementById('ghostly-rotator');
+
+    if (isMystic) {
+        if (ghostlyEl && !ghostRotator) {
+            ghostRotator = new GhostRotator(ghostlyEl);
+        }
+        if (ghostRotator) ghostRotator.start();
+    } else {
+        if (ghostRotator) ghostRotator.stop();
+    }
+}
+
+// Initial Check
+updateRotatorState();
+
+// Hook into Toggle Theme
+const rotatorObserver = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'class') {
+            updateRotatorState();
+        }
+    });
+});
+rotatorObserver.observe(document.body, { attributes: true });
