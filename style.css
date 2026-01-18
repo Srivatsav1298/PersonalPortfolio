@@ -3352,6 +3352,10 @@ body.mystic-mode .service-card {
 /* --- Elite Charcoal Hero & Contact Implementation --- */
 
 /* Signature & Logo Area - Premium Style */
+body.premium-mode .elite-signature-box {
+    display: none; /* Hidden in Premium mode */
+}
+
 body.premium-mode .elite-signature {
     font-size: var(--font-tiny);
     font-weight: 600;
@@ -3359,35 +3363,6 @@ body.premium-mode .elite-signature {
     color: rgba(237, 237, 237, 0.7);
     text-transform: uppercase;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-body.premium-mode .elite-signature-box {
-    display: flex;
-    align-items: center;
-    padding: 10px 20px;
-    background: rgba(255, 255, 255, 0.04);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow:
-        0 2px 8px rgba(0, 0, 0, 0.08),
-        inset 0 1px 0 rgba(255, 255, 255, 0.06);
-}
-
-body.premium-mode .elite-signature-box:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.15);
-    transform: translateY(-2px);
-    box-shadow:
-        0 4px 16px rgba(0, 0, 0, 0.12),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-}
-
-body.premium-mode .elite-signature-box:hover .elite-signature {
-    color: rgba(237, 237, 237, 0.95);
-    letter-spacing: 0.22em;
 }
 
 /* Mystic Mode Signature */
@@ -3432,6 +3407,49 @@ body.mystic-mode .elite-signature-box {
     color: var(--text-primary);
     margin-bottom: 32px;
     max-width: 720px;
+}
+
+/* Premium Mode: New Centered Hero Name */
+body.premium-mode .elite-hero-name {
+    font-size: clamp(56px, 8vw, 120px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+    margin-bottom: 32px;
+    text-align: center;
+    background: linear-gradient(135deg,
+        rgba(237, 237, 237, 1) 0%,
+        rgba(94, 234, 212, 0.9) 50%,
+        rgba(237, 237, 237, 1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: heroNameFade 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+}
+
+@keyframes heroNameFade {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+body.premium-mode .elite-hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Hide Services Section in Premium Mode */
+body.premium-mode #services {
+    display: none;
 }
 
 .elite-subheading {
