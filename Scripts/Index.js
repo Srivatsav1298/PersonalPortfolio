@@ -860,3 +860,235 @@ const cinematicObserver = new MutationObserver((mutations) => {
     });
 });
 cinematicObserver.observe(document.body, { attributes: true });
+
+// ========================================
+// RITUAL KNIFE NAVIGATION (MYSTIC MODE)
+// Premium, Ritualistic, Elite Horror
+// ========================================
+
+let ritualMenuActive = false;
+
+function initRitualKnifeNav() {
+    const knifeTrigger = document.getElementById('knife-trigger');
+    const knifeContainer = document.querySelector('.knife-container');
+    const incisionLine = document.getElementById('incision-line');
+    const ritualMenu = document.getElementById('ritual-menu');
+    const menuItems = document.querySelectorAll('.ritual-menu-item');
+    const bloodDripsContainer = document.getElementById('blood-drips');
+    const knifeLabel = document.getElementById('knife-label');
+
+    if (!knifeTrigger || !ritualMenu) return;
+
+    // Knife click handler - Pierce and reveal menu
+    knifeTrigger.addEventListener('click', () => {
+        if (!document.body.classList.contains('mystic-mode')) return;
+
+        if (!ritualMenuActive) {
+            pierceAndReveal();
+        } else {
+            collapseMenu();
+        }
+    });
+
+    // Menu item click handlers
+    menuItems.forEach((item, index) => {
+        item.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = item.getAttribute('href');
+            const label = item.getAttribute('data-label');
+
+            // Update knife label
+            if (knifeLabel) {
+                knifeLabel.textContent = label;
+            }
+
+            // Collapse menu
+            collapseMenu();
+
+            // Navigate after animation
+            setTimeout(() => {
+                document.querySelector(targetId)?.scrollIntoView({ behavior: 'smooth' });
+            }, 800);
+        });
+    });
+
+    // Pierce and reveal function
+    function pierceAndReveal() {
+        ritualMenuActive = true;
+
+        // 1. Knife pierces (slides right)
+        knifeContainer.classList.add('piercing');
+
+        setTimeout(() => {
+            // 2. Incision line appears
+            incisionLine.classList.add('active');
+
+            setTimeout(() => {
+                // 3. Menu overlay fades in
+                ritualMenu.classList.add('active');
+
+                // 4. Reveal menu items sequentially with blood drips
+                revealMenuItems();
+            }, 300);
+        }, 500);
+    }
+
+    // Reveal menu items with staggered animation and blood drips
+    function revealMenuItems() {
+        menuItems.forEach((item, index) => {
+            // Irregular timing for psychological effect
+            const baseDelay = 700;
+            const randomFactor = 0.9 + (Math.random() * 0.2); // 0.9 to 1.1
+            const delay = baseDelay * index * randomFactor;
+
+            setTimeout(() => {
+                // Reveal menu item
+                item.classList.add('revealed');
+
+                // Create blood drip after item appears
+                setTimeout(() => {
+                    createBloodDrip(item, index);
+                }, 150);
+            }, delay);
+        });
+    }
+
+    // Create blood drip effect
+    function createBloodDrip(menuItem, index) {
+        if (!bloodDripsContainer) return;
+
+        // Get position from menu item
+        const rect = menuItem.getBoundingClientRect();
+        const centerX = rect.left + (rect.width / 2);
+        const startY = rect.top - 20;
+
+        // Create blood drip element
+        const drip = document.createElement('div');
+        drip.className = 'blood-drip';
+        drip.style.left = `${centerX}px`;
+        drip.style.top = `${startY}px`;
+
+        bloodDripsContainer.appendChild(drip);
+
+        // Create blood streak on incision
+        createBloodStreak(centerX);
+
+        // Remove drip after animation completes
+        setTimeout(() => {
+            drip.remove();
+        }, 2500);
+    }
+
+    // Create blood streak effect on incision line
+    function createBloodStreak(x) {
+        const streak = document.createElement('div');
+        streak.className = 'blood-streak';
+        streak.style.left = `${x - 10}px`;
+        streak.style.top = '50%';
+        streak.style.width = '20px';
+
+        document.body.appendChild(streak);
+
+        setTimeout(() => {
+            streak.remove();
+        }, 3000);
+    }
+
+    // Collapse menu
+    function collapseMenu() {
+        ritualMenuActive = false;
+
+        // 1. Fade out menu items first
+        menuItems.forEach((item, index) => {
+            setTimeout(() => {
+                item.classList.remove('revealed');
+            }, index * 80);
+        });
+
+        setTimeout(() => {
+            // 2. Clear blood drips by removing all child nodes
+            if (bloodDripsContainer) {
+                while (bloodDripsContainer.firstChild) {
+                    bloodDripsContainer.removeChild(bloodDripsContainer.firstChild);
+                }
+            }
+
+            // 3. Fade out menu overlay
+            ritualMenu.classList.remove('active');
+
+            setTimeout(() => {
+                // 4. Incision seals
+                incisionLine.classList.remove('active');
+
+                // 5. Knife retracts
+                knifeContainer.classList.remove('piercing');
+            }, 400);
+        }, menuItems.length * 80 + 200);
+    }
+
+    // Close menu on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && ritualMenuActive) {
+            collapseMenu();
+        }
+    });
+
+    // Update knife label based on current section
+    const sections = document.querySelectorAll('section, div[id]');
+    const sectionLabels = {
+        'header': 'Sanctum',
+        'about': 'The Engineer',
+        'portfolio': 'Artifacts',
+        'contact': 'Summoning'
+    };
+
+    window.addEventListener('scroll', () => {
+        if (!document.body.classList.contains('mystic-mode')) return;
+        if (ritualMenuActive) return; // Don't update while menu is open
+
+        let current = 'Sanctum';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+                const sectionId = section.getAttribute('id');
+                if (sectionLabels[sectionId]) {
+                    current = sectionLabels[sectionId];
+                }
+            }
+        });
+
+        if (knifeLabel && knifeLabel.textContent !== current) {
+            knifeLabel.textContent = current;
+        }
+    });
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', initRitualKnifeNav);
+
+// Reinitialize when switching to Mystic mode
+const knifeObserver = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'class') {
+            const isMystic = document.body.classList.contains('mystic-mode');
+            if (isMystic) {
+                // Reset menu state when switching to mystic mode
+                const ritualMenu = document.getElementById('ritual-menu');
+                const knifeContainer = document.querySelector('.knife-container');
+                const incisionLine = document.getElementById('incision-line');
+
+                if (ritualMenu) ritualMenu.classList.remove('active');
+                if (knifeContainer) knifeContainer.classList.remove('piercing');
+                if (incisionLine) incisionLine.classList.remove('active');
+
+                document.querySelectorAll('.ritual-menu-item').forEach(item => {
+                    item.classList.remove('revealed');
+                });
+
+                ritualMenuActive = false;
+            }
+        }
+    });
+});
+knifeObserver.observe(document.body, { attributes: true });

@@ -48,7 +48,7 @@
                 <span class="elite-signature">SRIVATSAV SARAVANAN</span>
             </div>
 
-            <!-- Center: Pill Nav -->
+            <!-- Center: Pill Nav (Premium Mode) -->
             <nav class="nav-pill">
                 <ul>
                     <li><a href="#header">Home</a></li>
@@ -57,6 +57,83 @@
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
+
+            <!-- Mystic Mode: Ritual Knife Navigation -->
+            <div class="ritual-knife-nav" id="ritual-knife-nav">
+                <div class="knife-container" id="knife-trigger">
+                    <!-- Knife Blade SVG -->
+                    <svg class="ceremonial-knife" viewBox="0 0 200 40" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Blade -->
+                        <defs>
+                            <linearGradient id="blade-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#3A3E44;stop-opacity:1" />
+                                <stop offset="10%" style="stop-color:#2B2E34;stop-opacity:1" />
+                                <stop offset="90%" style="stop-color:#1A1D22;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#0E1014;stop-opacity:1" />
+                            </linearGradient>
+                            <linearGradient id="edge-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#4A4E54;stop-opacity:0.8" />
+                                <stop offset="100%" style="stop-color:#2B2E34;stop-opacity:0" />
+                            </linearGradient>
+                        </defs>
+
+                        <!-- Main blade body -->
+                        <path d="M 10 20 L 170 18 L 175 20 L 170 22 L 10 20 Z"
+                              fill="url(#blade-gradient)"
+                              class="blade-body"/>
+
+                        <!-- Sharp edge highlight -->
+                        <path d="M 10 18 L 170 17 L 175 20 L 170 18 L 10 18 Z"
+                              fill="url(#edge-gradient)"
+                              class="blade-edge"
+                              opacity="0.6"/>
+
+                        <!-- Knife tip (pointed) -->
+                        <path d="M 170 18 L 190 20 L 170 22 Z"
+                              fill="#2B2E34"
+                              class="blade-tip"/>
+
+                        <!-- Handle -->
+                        <rect x="2" y="17" width="12" height="6"
+                              fill="#1A1D22"
+                              rx="1"/>
+                        <rect x="3" y="18" width="10" height="4"
+                              fill="#2B2E34"
+                              rx="0.5"
+                              opacity="0.5"/>
+                    </svg>
+
+                    <span class="knife-state-label" id="knife-label">Sanctum</span>
+                </div>
+
+                <!-- Incision Line -->
+                <div class="incision-line" id="incision-line"></div>
+
+                <!-- Menu Overlay -->
+                <div class="ritual-menu-overlay" id="ritual-menu">
+                    <nav class="ritual-menu-items">
+                        <a href="#header" class="ritual-menu-item" data-label="Sanctum">
+                            <span class="menu-ritual-text">Home</span>
+                            <span class="menu-ritual-subtext">Sanctum</span>
+                        </a>
+                        <a href="#about" class="ritual-menu-item" data-label="The Engineer">
+                            <span class="menu-ritual-text">About</span>
+                            <span class="menu-ritual-subtext">The Engineer</span>
+                        </a>
+                        <a href="#portfolio" class="ritual-menu-item" data-label="Artifacts">
+                            <span class="menu-ritual-text">Projects</span>
+                            <span class="menu-ritual-subtext">Artifacts</span>
+                        </a>
+                        <a href="#contact" class="ritual-menu-item" data-label="Summoning">
+                            <span class="menu-ritual-text">Contact</span>
+                            <span class="menu-ritual-subtext">Summoning</span>
+                        </a>
+                    </nav>
+
+                    <!-- Blood drip container -->
+                    <div class="blood-drips-container" id="blood-drips"></div>
+                </div>
+            </div>
 
             <!-- Right: Actions -->
             <div class="nav-actions">

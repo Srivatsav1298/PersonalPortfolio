@@ -1574,6 +1574,306 @@ body.mystic-mode .nav-theme-toggle:hover {
     box-shadow: 0 0 20px rgba(139, 0, 0, 0.4);
 }
 
+/* ===================================
+   MYSTIC MODE: RITUAL KNIFE NAVIGATION
+   Premium, Ritualistic, Elite Horror
+   =================================== */
+
+/* Hide standard nav in Mystic mode, show in Premium */
+body.mystic-mode .nav-pill {
+    display: none;
+}
+
+body.premium-mode .ritual-knife-nav {
+    display: none;
+}
+
+/* Ritual Knife Navigation Container */
+.ritual-knife-nav {
+    display: none;
+    position: relative;
+    z-index: 10;
+}
+
+body.mystic-mode .ritual-knife-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Knife Container */
+.knife-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    position: relative;
+    z-index: 1000;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.knife-container.piercing {
+    transform: translateX(16px);
+}
+
+/* Ceremonial Knife SVG */
+.ceremonial-knife {
+    width: 140px;
+    height: 32px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+    transition: filter 0.3s ease;
+}
+
+.knife-container:hover .ceremonial-knife {
+    filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.6));
+}
+
+/* Blade sharpening on hover */
+.knife-container:hover .blade-edge {
+    opacity: 1;
+}
+
+.knife-container:hover .blade-tip {
+    fill: #3A3E44;
+}
+
+/* Knife State Label */
+.knife-state-label {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    color: #9A9A9A;
+    text-transform: uppercase;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+.knife-container:hover .knife-state-label {
+    color: #CFCFCF;
+    opacity: 1;
+}
+
+/* Incision Line (appears when knife pierces) */
+.incision-line {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(122, 22, 34, 0.4) 20%,
+        rgba(122, 22, 34, 0.6) 50%,
+        rgba(122, 22, 34, 0.4) 80%,
+        transparent 100%);
+    opacity: 0;
+    z-index: 999;
+    transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+}
+
+.incision-line.active {
+    width: 300px;
+    opacity: 1;
+}
+
+/* Ritual Menu Overlay */
+.ritual-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(2, 2, 3, 0.98);
+    backdrop-filter: blur(20px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 998;
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ritual-menu-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Ritual Menu Items */
+.ritual-menu-items {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+}
+
+.ritual-menu-item {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+}
+
+.ritual-menu-item.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.ritual-menu-item:hover {
+    transform: translateY(-4px);
+}
+
+/* Menu Text */
+.menu-ritual-text {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    color: #E0E0E0;
+    text-transform: lowercase;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.ritual-menu-item:hover .menu-ritual-text {
+    color: #FFFFFF;
+    letter-spacing: 0.15em;
+}
+
+/* Menu Subtext */
+.menu-ritual-subtext {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    color: #7A1622;
+    text-transform: uppercase;
+    opacity: 0.7;
+}
+
+.ritual-menu-item:hover .menu-ritual-subtext {
+    opacity: 1;
+    color: #8B1F2E;
+}
+
+/* Blood Drips Container */
+.blood-drips-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 999;
+}
+
+/* Individual Blood Drip */
+.blood-drip {
+    position: absolute;
+    width: 2px;
+    height: 0;
+    background: linear-gradient(180deg,
+        rgba(122, 22, 34, 0.35) 0%,
+        rgba(122, 22, 34, 0.25) 50%,
+        rgba(122, 22, 34, 0.15) 100%);
+    opacity: 0;
+    animation: blood-fall 2s cubic-bezier(0.4, 0, 0.6, 1) forwards;
+}
+
+@keyframes blood-fall {
+    0% {
+        height: 0;
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    20% {
+        height: 20px;
+    }
+    50% {
+        height: 60px;
+    }
+    80% {
+        opacity: 0.6;
+    }
+    100% {
+        height: 80px;
+        opacity: 0;
+    }
+}
+
+/* Blood Streak (left on incision) */
+.blood-streak {
+    position: absolute;
+    height: 1px;
+    background: rgba(122, 22, 34, 0.15);
+    opacity: 0;
+    animation: streak-fade 3s ease-out forwards;
+}
+
+@keyframes streak-fade {
+    0% {
+        opacity: 0;
+    }
+    20% {
+        opacity: 0.4;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .ceremonial-knife {
+        width: 100px;
+        height: 24px;
+    }
+
+    .knife-state-label {
+        font-size: 8px;
+    }
+
+    .menu-ritual-text {
+        font-size: 32px;
+    }
+
+    .ritual-menu-items {
+        gap: 30px;
+    }
+}
+
+/* Mystic Mode Theme Toggle */
+body.mystic-mode .nav-theme-toggle {
+    background: rgba(74, 4, 4, 0.3);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: rgba(185, 28, 28, 0.9);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(139, 0, 0, 0.4);
+}
+
+body.mystic-mode .nav-theme-toggle:hover {
+    background: rgba(139, 0, 0, 0.3);
+    color: rgba(220, 38, 38, 1);
+    transform: rotate(180deg);
+    box-shadow: 0 0 20px rgba(139, 0, 0, 0.4);
+}
+
 #sidemenu li a {
     text-decoration: none;
     color: #fff;
