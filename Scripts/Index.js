@@ -862,13 +862,117 @@ const cinematicObserver = new MutationObserver((mutations) => {
 cinematicObserver.observe(document.body, { attributes: true });
 
 // ========================================
-// RITUAL KNIFE NAVIGATION (MYSTIC MODE)
-// Premium, Ritualistic, Elite Horror
+// HORIZONTAL RITUAL NAVIGATION (MYSTIC MODE)
+// Compact, Premium, Elite Horror - Expands to Right
+// ========================================
+
+function initMysticHorizontalNav() {
+    const trigger = document.getElementById('ritual-trigger');
+    const horizontalBar = document.getElementById('ritual-horizontal-bar');
+    const navLinks = document.querySelectorAll('.ritual-nav-link');
+
+    if (!trigger || !horizontalBar) return;
+
+    let isExpanded = false;
+
+    // Toggle trigger click handler
+    trigger.addEventListener('click', () => {
+        if (!document.body.classList.contains('mystic-mode')) return;
+
+        isExpanded = !isExpanded;
+
+        if (isExpanded) {
+            trigger.classList.add('active');
+            horizontalBar.classList.add('expanded');
+        } else {
+            trigger.classList.remove('active');
+            horizontalBar.classList.remove('expanded');
+        }
+    });
+
+    // Close menu on link click and smooth navigate
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href');
+
+            // Close menu
+            trigger.classList.remove('active');
+            horizontalBar.classList.remove('expanded');
+            isExpanded = false;
+
+            // Navigate after slight delay for animation
+            setTimeout(() => {
+                document.querySelector(targetId)?.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }, 300);
+        });
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && isExpanded) {
+            trigger.classList.remove('active');
+            horizontalBar.classList.remove('expanded');
+            isExpanded = false;
+        }
+    });
+
+    // Update active link based on scroll position
+    const sections = document.querySelectorAll('section, div[id]');
+    window.addEventListener('scroll', () => {
+        if (!document.body.classList.contains('mystic-mode')) return;
+
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            const href = link.getAttribute('href');
+            if (href && href.includes(current)) {
+                link.classList.add('active');
+            }
+        });
+    });
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', initMysticHorizontalNav);
+
+// Reinitialize when switching to Mystic mode
+const horizontalNavObserver = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'class') {
+            const isMystic = document.body.classList.contains('mystic-mode');
+            if (isMystic) {
+                // Reset navigation state
+                const trigger = document.getElementById('ritual-trigger');
+                const horizontalBar = document.getElementById('ritual-horizontal-bar');
+
+                if (trigger) trigger.classList.remove('active');
+                if (horizontalBar) horizontalBar.classList.remove('expanded');
+            }
+        }
+    });
+});
+horizontalNavObserver.observe(document.body, { attributes: true });
+
+// ========================================
+// RITUAL KNIFE NAVIGATION (MYSTIC MODE) - DISABLED
+// Old knife navigation kept for reference
 // ========================================
 
 let ritualMenuActive = false;
 
-function initRitualKnifeNav() {
+function initRitualKnifeNav_DISABLED() {
     const knifeTrigger = document.getElementById('knife-trigger');
     const knifeContainer = document.querySelector('.knife-container');
     const incisionLine = document.getElementById('incision-line');
@@ -1064,11 +1168,11 @@ function initRitualKnifeNav() {
     });
 }
 
-// Initialize on page load
-document.addEventListener('DOMContentLoaded', initRitualKnifeNav);
+// Initialize on page load - DISABLED (replaced with horizontal navigation)
+// document.addEventListener('DOMContentLoaded', initRitualKnifeNav_DISABLED);
 
-// Reinitialize when switching to Mystic mode
-const knifeObserver = new MutationObserver((mutations) => {
+// Reinitialize when switching to Mystic mode - DISABLED
+const knifeObserver_DISABLED = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
         if (mutation.attributeName === 'class') {
             const isMystic = document.body.classList.contains('mystic-mode');
@@ -1091,7 +1195,7 @@ const knifeObserver = new MutationObserver((mutations) => {
         }
     });
 });
-knifeObserver.observe(document.body, { attributes: true });
+// knifeObserver_DISABLED.observe(document.body, { attributes: true }); // DISABLED
 
 // ========================================
 // MYSTIC MODE: ARTIFACT ARCHIVE SUMMONING

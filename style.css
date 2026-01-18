@@ -1575,8 +1575,8 @@ body.mystic-mode .nav-theme-toggle:hover {
 }
 
 /* ===================================
-   MYSTIC MODE: RITUAL KNIFE NAVIGATION
-   Premium, Ritualistic, Elite Horror
+   MYSTIC MODE: HORIZONTAL RITUAL NAVIGATION
+   Compact, Premium, Elite Horror
    =================================== */
 
 /* Hide standard nav in Mystic mode, show in Premium */
@@ -1584,44 +1584,243 @@ body.mystic-mode .nav-pill {
     display: none;
 }
 
-body.premium-mode .ritual-knife-nav {
+body.premium-mode .mystic-horizontal-nav {
     display: none;
 }
 
-/* Ritual Knife Navigation Container */
-.ritual-knife-nav {
+/* Horizontal Navigation Container */
+.mystic-horizontal-nav {
     display: none;
+    position: fixed;
+    top: 30px;
+    right: 160px; /* Positioned left of theme toggle */
+    z-index: 10004;
+}
+
+body.mystic-mode .mystic-horizontal-nav {
+    display: block;
+}
+
+/* Ritual Trigger (Compact Sigil) */
+.ritual-trigger {
     position: relative;
-    z-index: 10;
-}
-
-body.mystic-mode .ritual-knife-nav {
+    width: 44px;
+    height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-/* Knife Container */
-.knife-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
+    background: rgba(17, 18, 21, 0.25);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(122, 22, 34, 0.25);
+    border-radius: 10px;
     cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.ritual-trigger:hover {
+    background: rgba(17, 18, 21, 0.4);
+    border-color: rgba(122, 22, 34, 0.5);
+    transform: scale(1.05);
+    box-shadow:
+        0 6px 16px rgba(0, 0, 0, 0.6),
+        0 0 20px rgba(122, 22, 34, 0.2);
+}
+
+.ritual-trigger.active {
+    background: rgba(122, 22, 34, 0.15);
+    border-color: rgba(122, 22, 34, 0.6);
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.7),
+        0 0 24px rgba(122, 22, 34, 0.3),
+        inset 0 0 12px rgba(122, 22, 34, 0.1);
+}
+
+/* Ritual Sigil */
+.ritual-sigil {
+    font-size: 18px;
+    color: #9A9A9A;
+    transition: all 0.4s ease;
+    filter: drop-shadow(0 0 8px rgba(122, 22, 34, 0.3));
+}
+
+.ritual-trigger:hover .ritual-sigil {
+    color: #CFCFCF;
+    transform: rotate(90deg);
+    filter: drop-shadow(0 0 12px rgba(122, 22, 34, 0.5));
+}
+
+.ritual-trigger.active .ritual-sigil {
+    color: rgba(122, 22, 34, 0.9);
+    transform: rotate(180deg);
+    filter: drop-shadow(0 0 16px rgba(122, 22, 34, 0.6));
+}
+
+/* Horizontal Menu Bar (Expands to Right) */
+.ritual-horizontal-bar {
+    position: absolute;
+    top: 0;
+    right: 54px; /* Start from right of trigger */
+    height: 44px;
+    width: 0;
+    overflow: hidden;
+    background: rgba(17, 18, 21, 0.35);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(122, 22, 34, 0.2);
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+    transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.ritual-horizontal-bar.expanded {
+    width: 480px;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Navigation Items Container */
+.ritual-nav-items {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 20px;
+    gap: 0;
+}
+
+/* Individual Navigation Links */
+.ritual-nav-link {
     position: relative;
-    z-index: 1000;
-    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    text-decoration: none;
+    padding: 8px 20px;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.knife-container.piercing {
-    transform: translateX(16px);
+/* Staggered fade-in when expanded */
+.ritual-nav-link[data-index="0"] {
+    transition-delay: 0.1s;
 }
 
-/* Ceremonial Knife SVG */
-.ceremonial-knife {
-    width: 140px;
-    height: 32px;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+.ritual-nav-link[data-index="1"] {
+    transition-delay: 0.2s;
+}
+
+.ritual-nav-link[data-index="2"] {
+    transition-delay: 0.3s;
+}
+
+.ritual-nav-link[data-index="3"] {
+    transition-delay: 0.4s;
+}
+
+.ritual-horizontal-bar.expanded .ritual-nav-link {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Link Text */
+.ritual-link-text {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: #9A9A9A;
+    text-transform: lowercase;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+/* Hover Blood Glow */
+.ritual-nav-link:hover .ritual-link-text {
+    color: #CFCFCF;
+}
+
+.ritual-nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 6px;
+    left: 20px;
+    right: 20px;
+    height: 1px;
+    background: rgba(122, 22, 34, 0.6);
+    transform: scaleX(0);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ritual-nav-link:hover::after {
+    transform: scaleX(1);
+}
+
+/* Active State */
+.ritual-nav-link.active .ritual-link-text {
+    color: rgba(122, 22, 34, 0.95);
+    text-shadow: 0 0 8px rgba(122, 22, 34, 0.4);
+}
+
+.ritual-nav-link.active::after {
+    transform: scaleX(1);
+    background: rgba(122, 22, 34, 0.8);
+    box-shadow: 0 0 8px rgba(122, 22, 34, 0.3);
+}
+
+/* Blood Mist Effect on Click */
+.ritual-nav-link::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(122, 22, 34, 0.3) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    transition: width 0.4s ease, height 0.4s ease;
+    pointer-events: none;
+}
+
+.ritual-nav-link:active::before {
+    width: 60px;
+    height: 60px;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .mystic-horizontal-nav {
+        top: 20px;
+        right: 100px;
+    }
+
+    .ritual-horizontal-bar.expanded {
+        width: 320px;
+    }
+
+    .ritual-nav-items {
+        padding: 0 12px;
+        gap: 0;
+    }
+
+    .ritual-nav-link {
+        padding: 8px 12px;
+    }
+
+    .ritual-link-text {
+        font-size: 11px;
+    }
+}
+
+/* ===================================
+   OLD KNIFE NAVIGATION (HIDDEN)
+   =================================== */
+
+/* Hide old knife navigation */
+.ritual-knife-nav {
+    display: none !important;
+}
     transition: filter 0.3s ease;
 }
 
