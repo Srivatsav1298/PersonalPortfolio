@@ -237,6 +237,236 @@ body.premium-mode .mystic-cinematic-hero {
     display: none;
 }
 
+/* ===================================
+   MYSTIC MODE: RITUAL DISCLOSURE (ABOUT SECTION)
+   Elite Horror, Chilling, Unsettling, Ritualistic
+   =================================== */
+
+/* Hide/Show based on mode */
+body.mystic-mode .premium-about-section {
+    display: none;
+}
+
+body.premium-mode .mystic-about-section {
+    display: none;
+}
+
+body.mystic-mode .mystic-about-section {
+    display: block;
+    padding: 120px 0;
+    position: relative;
+}
+
+/* Disclosure Header */
+.mystic-disclosure-header {
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+.mystic-disclosure-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(40px, 5vw, 64px);
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    color: #E6E6E6;
+    margin: 0 0 16px 0;
+    text-transform: lowercase;
+}
+
+.mystic-disclosure-intro {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(16px, 1.8vw, 20px);
+    font-weight: 300;
+    color: #9A9A9A;
+    margin: 0;
+    opacity: 0.7;
+}
+
+/* Disclosure Blocks */
+.mystic-disclosure-block {
+    max-width: 1000px;
+    margin: 0 auto 120px auto;
+    border-top: 1px solid rgba(207, 207, 207, 0.08);
+    padding-top: 60px;
+}
+
+.mystic-disclosure-block:last-child {
+    margin-bottom: 0;
+}
+
+/* Block Header */
+.mystic-block-header {
+    display: flex;
+    align-items: baseline;
+    gap: 24px;
+    margin-bottom: 48px;
+}
+
+.mystic-block-number {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    color: #7A1622; /* Blood red - rare accent */
+    opacity: 0.6;
+}
+
+.mystic-block-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(24px, 3vw, 32px);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: #CFCFCF;
+    margin: 0;
+    text-transform: lowercase;
+}
+
+/* The Arsenal - Instruments Grid */
+.mystic-instruments-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1px;
+    background: rgba(207, 207, 207, 0.05);
+    border: 1px solid rgba(207, 207, 207, 0.08);
+}
+
+.mystic-instrument {
+    background: #020203;
+    padding: 32px 24px;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    cursor: default;
+}
+
+.mystic-instrument::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2px;
+    height: 0;
+    background: #7A1622; /* Blood red */
+    transition: height 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mystic-instrument:hover::before {
+    height: 100%;
+}
+
+.mystic-instrument:hover {
+    background: rgba(122, 22, 34, 0.03);
+}
+
+.mystic-instrument-name {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: #E6E6E6;
+    margin-bottom: 8px;
+}
+
+.mystic-instrument-desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    color: #9A9A9A;
+    opacity: 0.6;
+    text-transform: lowercase;
+}
+
+/* Timeline - Field Work & The Becoming */
+.mystic-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+}
+
+.mystic-timeline-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 40px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(207, 207, 207, 0.05);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mystic-timeline-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.mystic-timeline-item:hover {
+    border-bottom-color: rgba(122, 22, 34, 0.2);
+}
+
+.mystic-timeline-period {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: #7A1622; /* Blood red */
+    opacity: 0.7;
+    padding-top: 4px;
+}
+
+.mystic-timeline-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.mystic-timeline-role {
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: #E6E6E6;
+}
+
+.mystic-timeline-org {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #CFCFCF;
+    opacity: 0.7;
+}
+
+.mystic-timeline-desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.6;
+    color: #9A9A9A;
+    opacity: 0.8;
+    margin-top: 8px;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .mystic-disclosure-block {
+        margin-bottom: 80px;
+    }
+
+    .mystic-block-header {
+        gap: 16px;
+    }
+
+    .mystic-instruments-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .mystic-timeline-item {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .mystic-timeline-period {
+        padding-top: 0;
+    }
+}
+
 * {
     margin: 0;
     padding: 0;
