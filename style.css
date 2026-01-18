@@ -4814,9 +4814,9 @@ body.mystic-mode .elite-signature-box {
     max-width: 720px;
 }
 
-/* Premium Mode: New Centered Hero Name */
+/* Premium Mode: New Centered Hero Name - Reduced Size */
 body.premium-mode .elite-hero-name {
-    font-size: clamp(56px, 8vw, 120px);
+    font-size: clamp(40px, 6vw, 72px); /* Reduced from 56-120px to 40-72px */
     font-weight: 700;
     line-height: 1.1;
     letter-spacing: -0.03em;
@@ -5215,6 +5215,11 @@ body.premium-mode .premium-projects-section .container {
     margin-bottom: 40px;
     letter-spacing: -0.02em;
     text-align: left;
+    /* Match About section gradient */
+    background: linear-gradient(135deg, var(--text-primary) 0%, rgba(94, 234, 212, 0.8) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 /* Compact Grid Layout */
@@ -5601,125 +5606,243 @@ body.mystic-mode .tech-badge:hover {
     color: var(--text-primary);
 }
 
-/* Contact Section (Quiet Invitation) */
-.maang-contact-container {
-    padding: 120px 0;
-    max-width: 1040px;
+/* --- PREMIUM MAANG CONTACT SECTION (Elite, High-End) --- */
+/* Inspired by Apple, Linear, Stripe, Vercel */
+
+#contact {
+    background: #0B0D10;
+    /* Ambient depth gradient */
+    background-image: radial-gradient(circle at top center, rgba(20, 184, 166, 0.03) 0%, #0B0D10 50%);
+    padding: 120px 0 80px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
 }
 
-.maang-contact-content {
-    display: flex;
-    flex-direction: column;
-    gap: 48px;
+/* Subtle animated gradient orb */
+#contact::before {
+    content: "";
+    position: absolute;
+    top: -40%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(20, 184, 166, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(80px);
+    animation: float-orb 20s ease-in-out infinite;
+    pointer-events: none;
 }
 
-@media (min-width: 1024px) {
-    .maang-contact-content {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: flex-start;
+@keyframes float-orb {
+    0%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    50% {
+        transform: translateX(-50%) translateY(-30px);
     }
 }
 
-.maang-contact-header {
-    max-width: 520px;
+/* Premium Contact Container */
+body.premium-mode .maang-contact-container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 5%;
+    position: relative;
+    z-index: 2;
 }
 
-.maang-contact-title {
-    font-size: clamp(28px, 4vw, 36px);
-    font-weight: 600;
-    line-height: 1.2;
-    color: #EDEDED;
+body.premium-mode .maang-contact-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 56px;
+}
+
+/* Contact Header */
+body.premium-mode .maang-contact-header {
+    text-align: center;
+    max-width: 640px;
+}
+
+body.premium-mode .maang-contact-title {
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: #FFFFFF;
     margin-bottom: 20px;
+    /* Subtle teal gradient accent */
+    background: linear-gradient(135deg, #FFFFFF 0%, rgba(94, 234, 212, 0.9) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
-.maang-contact-supporting {
-    font-size: 16px;
+body.premium-mode .maang-contact-supporting {
+    font-size: 18px;
     line-height: 1.6;
-    color: #B5B8BC;
+    color: rgba(181, 184, 188, 0.9);
+    font-weight: 400;
+    margin: 0;
 }
 
-.maang-contact-form-box {
+/* Premium Glassmorphic Form Card */
+body.premium-mode .maang-contact-form-box {
     width: 100%;
-    max-width: 480px;
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid #1F2328;
-    border-radius: 14px;
-    padding: 32px;
+    max-width: 580px;
+    background: rgba(17, 20, 24, 0.25);
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    padding: 48px;
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.maang-minimal-form {
+body.premium-mode .maang-contact-form-box:hover {
+    transform: translateY(-4px);
+    box-shadow:
+        0 32px 80px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(20, 184, 166, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    border-color: rgba(20, 184, 166, 0.2);
+}
+
+/* Form Styling */
+body.premium-mode .maang-minimal-form {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 28px;
 }
 
-.maang-input-group {
+body.premium-mode .maang-input-group {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-}
-
-.maang-input-group label {
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
-.maang-input-group input,
-.maang-input-group textarea {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid #2A2E33;
-    border-radius: 8px;
-    padding: 14px 16px;
-    color: #EDEDED;
-    font-size: 15px;
-    outline: none;
-    transition: border-color 0.2s ease;
-}
-
-.maang-input-group input:focus,
-.maang-input-group textarea:focus {
-    border-color: #3A3F45;
-}
-
-.maang-submit-btn {
-    width: 100%;
-    background: linear-gradient(to bottom, #EDEDED, #CFCFCF);
-    color: #0E0F12;
-    font-size: 14px;
-    font-weight: 500;
-    padding: 14px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: transform 0.2s ease, filter 0.2s ease;
-}
-
-.maang-submit-btn:hover {
-    transform: translateY(-1px);
-    filter: brightness(1.05);
-}
-
-.maang-footer-microcopy {
-    font-size: 13px;
-    color: #8F9499;
-    margin-top: 24px;
+    gap: 10px;
     text-align: left;
 }
 
-.maang-footer-copyright {
-    margin-top: 80px;
-    padding: 40px 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.03);
-    text-align: center;
+body.premium-mode .maang-input-group label {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(181, 184, 188, 0.8);
 }
 
-.maang-footer-copyright p {
-    font-size: 12px;
-    color: var(--text-muted);
+body.premium-mode .maang-input-group input,
+body.premium-mode .maang-input-group textarea {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 16px 20px;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 400;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    font-family: var(--font-main);
+}
+
+body.premium-mode .maang-input-group input::placeholder,
+body.premium-mode .maang-input-group textarea::placeholder {
+    color: rgba(181, 184, 188, 0.4);
+}
+
+body.premium-mode .maang-input-group input:focus,
+body.premium-mode .maang-input-group textarea:focus {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(20, 184, 166, 0.4);
+    box-shadow:
+        0 0 0 3px rgba(20, 184, 166, 0.08),
+        0 4px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-1px);
+}
+
+body.premium-mode .maang-input-group textarea {
+    resize: vertical;
+    min-height: 120px;
+    font-family: var(--font-main);
+}
+
+/* Premium Submit Button */
+body.premium-mode .maang-submit-btn {
+    width: 100%;
+    padding: 18px 32px;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: #000000;
+    background: linear-gradient(135deg, #FFFFFF 0%, #E5E5E5 100%);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.12),
+        0 8px 24px rgba(0, 0, 0, 0.16),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    margin-top: 8px;
+}
+
+body.premium-mode .maang-submit-btn:hover {
+    transform: translateY(-2px) scale(1.01);
+    box-shadow:
+        0 4px 16px rgba(0, 0, 0, 0.16),
+        0 12px 32px rgba(0, 0, 0, 0.2),
+        0 0 0 1px rgba(20, 184, 166, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+body.premium-mode .maang-submit-btn:active {
+    transform: translateY(0) scale(0.99);
+}
+
+/* Footer Microcopy */
+body.premium-mode .maang-footer-microcopy {
+    font-size: 13px;
+    color: rgba(143, 148, 153, 0.8);
+    text-align: center;
+    margin-top: 24px;
+    line-height: 1.5;
+}
+
+/* Copyright Footer */
+body.premium-mode .maang-footer-copyright {
+    margin-top: 80px;
+    padding: 32px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+body.premium-mode .maang-footer-copyright p {
+    font-size: 13px;
+    color: rgba(143, 148, 153, 0.6);
+    letter-spacing: 0.02em;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    body.premium-mode .maang-contact-container {
+        padding: 0 20px;
+    }
+
+    body.premium-mode .maang-contact-title {
+        font-size: 32px;
+    }
+
+    body.premium-mode .maang-contact-form-box {
+        padding: 32px 24px;
+        border-radius: 20px;
+    }
+
+    body.premium-mode .maang-submit-btn {
+        padding: 16px 28px;
+    }
 }
 
 /* Mobile Responsiveness */
