@@ -1575,6 +1575,100 @@ body.mystic-mode .nav-theme-toggle:hover {
 }
 
 /* ===================================
+   NAVIGATION ACTION BUTTONS (PREMIUM MODE)
+   Glassmorphic Resume & GitHub buttons
+   =================================== */
+
+/* Container Spacing */
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Premium Mode Action Buttons */
+body.premium-mode .nav-action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    color: rgba(237, 237, 237, 0.8);
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Hover Glow Effect */
+body.premium-mode .nav-action-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(94, 234, 212, 0.2), transparent);
+    transform: translate(-50%, -50%);
+    transition: width 0.5s ease, height 0.5s ease;
+}
+
+body.premium-mode .nav-action-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #FFFFFF;
+    border-color: rgba(20, 184, 166, 0.3);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow:
+        0 4px 16px rgba(20, 184, 166, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+body.premium-mode .nav-action-btn:hover::before {
+    width: 100px;
+    height: 100px;
+}
+
+body.premium-mode .nav-action-btn:active {
+    transform: translateY(0) scale(0.95);
+}
+
+body.premium-mode .nav-action-btn i {
+    font-size: 18px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Hide in Mystic Mode */
+body.mystic-mode .nav-action-btn {
+    display: none;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .nav-actions {
+        gap: 8px;
+    }
+
+    body.premium-mode .nav-action-btn {
+        width: 40px;
+        height: 40px;
+    }
+
+    body.premium-mode .nav-action-btn i {
+        font-size: 16px;
+    }
+}
+
+/* ===================================
    MYSTIC MODE: HORIZONTAL RITUAL NAVIGATION
    Compact, Premium, Elite Horror
    =================================== */
