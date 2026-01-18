@@ -2,10 +2,15 @@
 const contentMap = {
     premium: {
         statusText: "System Architect. Production Systems. Horizontally Scalable.",
-        heroTagline: "An Engineer building solutions for real-world impact.",
-        heroTitle: "Srivatsav.",
-        aboutTitle: "Systems Architecture <br>& Deep Data Strategy.",
-        aboutText: "I architect high-availability systems and data pipelines for production environments. My work focuses on distributed intelligence and sovereign infrastructure, delivering impact through principled engineering and disciplined trade-offs.",
+        heroGreeting: "Hey, there",
+        heroName: "Srivatsav Saravanan",
+        heroRoles: [
+            "A software architect with a passion for building smarter, faster, and scalable software.",
+            "A problem solver specializing in AI solutions and advanced backend lattices.",
+            "An engineer who believes code should be smart and occasionally eats too much chocolate."
+        ],
+        aboutTitle: "One human. <br>Many lines of code.",
+        aboutText: "I'm a Software Engineer with 3+ years of experience turning complex problems into elegant digital realities. Currently, I'm deep-diving into a Master's in Data Science because I believe code should be smart, and data should have a personality.",
         servicesTitle: "Core Competencies.",
         service1Title: "Distributed Intelligence",
         service1Text: "Implementing agentic backend architectures that self-regulate and scale under production loads.",
@@ -15,10 +20,11 @@ const contentMap = {
         contactTitle: "Initiate Outreach.",
         footerText: "&copy; 2025 Srivatsav. Architecting Scale. Engineering Trust. Code that thinks. Data that speaks.",
         tab1: "Superpowers",
-        tab2: "History",
-        tab3: "Learning",
-        submitBtn: "Submit Inquiry",
-        cvBtn: "Download CV"
+        tab2: "What I’ve Done",
+        tab3: "How Did I Get Here?",
+        submitBtn: "Contact Me",
+        cvBtn: "Download CV",
+        heroCTA: "Let's make something great"
     },
     mystic: {
         statusText: "",
@@ -38,7 +44,8 @@ const contentMap = {
         tab2: "Field Work",
         tab3: "The Initiation",
         submitBtn: "Send a Whisper",
-        cvBtn: "Claim the Grimoire"
+        cvBtn: "Claim the Grimoire",
+        heroCTA: "View Echoes"
     }
 };
 
@@ -239,10 +246,13 @@ function initObserver() {
                     const isMystic = document.body.classList.contains('mystic-mode');
                     const fx = new TextScramble(title);
                     fx.setText(title.innerText, isMystic);
-                    title.dataset.scrambled = true;
+                    title.dataset.scrambled = "true";
                 }
-
-                observer.unobserve(entry.target);
+            } else {
+                // Re-trigger on scroll back
+                entry.target.classList.remove('active');
+                const title = entry.target.querySelector('.section-title');
+                if (title) title.dataset.scrambled = "";
             }
         });
     }, observerOptions);
@@ -349,8 +359,25 @@ function updateContent(mode) {
     if (submitBtn) submitBtn.textContent = theme.submitBtn;
 
     // Update CV Button
+    // Update Madison Hero Elements
+    const madisonBgGreeting = document.getElementById('madison-bg-greeting');
+    const madisonName = document.getElementById('madison-name-main');
+    const chocolateRole = document.getElementById('madison-chocolate-role');
+
+    if (madisonBgGreeting) madisonBgGreeting.textContent = theme.heroGreeting || "Hey, there";
+    if (madisonName) madisonName.textContent = theme.heroName || "Srivatsav Saravanan";
+
+    // Initial wrap for chocolate drops
+    if (chocolateRole && theme.heroRoles && theme.heroRoles.length > 0) {
+        wrapChocolateLetters(chocolateRole, theme.heroRoles[0]);
+    }
+
     const cvBtn = document.getElementById('cv-btn');
     if (cvBtn) cvBtn.textContent = theme.cvBtn;
+
+    // Update Hero CTA
+    const heroBtn = document.querySelector('.hero-cta .btn');
+    if (heroBtn) heroBtn.textContent = theme.heroCTA || "View Work";
 
     const serviceCards = document.querySelectorAll('.service-card');
     if (serviceCards.length >= 2) {
@@ -472,28 +499,121 @@ function initMetadataEngine() {
     }, 2000);
 }
 
-// --- Initialize All ---
+// --- Madison Interactive Engine ---
+function wrapChocolateLetters(el, text) {
+    if (!el) return;
+    el.innerHTML = '';
+    const words = text.split(' ');
+
+    words.forEach((word, wordIdx) => {
+        const wordSpan = document.createElement('span');
+        wordSpan.style.whiteSpace = 'nowrap';
+        wordSpan.style.display = 'inline-block';
+
+        [...word].forEach((char, charIdx) => {
+            const span = document.createElement('span');
+            span.textContent = char;
+            span.className = 'chocolate-char';
+            span.style.animationDelay = `${(wordIdx * 0.1) + (charIdx * 0.03)}s`;
+            wordSpan.appendChild(span);
+        });
+
+        el.appendChild(wordSpan);
+        if (wordIdx < words.length - 1) {
+            el.appendChild(document.createTextNode(' '));
+        }
+    });
+}
+
+function initMadisonRoleCycler() {
+    const target = document.getElementById('madison-chocolate-role');
+    if (!target) return;
+
+    const roles = contentMap.premium.heroRoles;
+    let index = 0;
+
+    setInterval(() => {
+        if (!document.body.classList.contains('premium-mode')) return;
+
+        // Staggered exit
+        const spans = target.querySelectorAll('.chocolate-char');
+        spans.forEach((s, i) => {
+            s.style.transition = 'all 0.5s ease';
+            s.style.opacity = '0';
+            s.style.transform = 'translateY(20px)';
+        });
+
+        setTimeout(() => {
+            index = (index + 1) % roles.length;
+            wrapChocolateLetters(target, roles[index]);
+        }, 600);
+    }, 6000);
+}
+
+// --- Madison Name Drip (Sequential Reveal) ---
+function initMadisonNameDrip() {
+    const el = document.getElementById('madison-name-main');
+    if (!el) return;
+
+    const text = el.innerText.trim();
+    el.innerHTML = '';
+
+    const words = text.split(' ');
+    let charIndex = 0;
+
+    words.forEach((word, wIdx) => {
+        [...word].forEach((char) => {
+            const span = document.createElement('span');
+            span.textContent = char;
+            span.className = 'madison-drip-char';
+            span.style.animationDelay = `${charIndex * 0.08}s`;
+            el.appendChild(span);
+            charIndex++;
+        });
+
+        if (wIdx < words.length - 1) {
+            // Force a break for the two-line layout
+            const br = document.createElement('div');
+            br.className = 'madison-drip-break';
+            el.appendChild(br);
+        }
+    });
+}
+
+// --- Scroll Spy for Sidebar ---
+function initScrollSpy() {
+    const sections = document.querySelectorAll('section, div[id]');
+    const navItems = document.querySelectorAll('.nav-item');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navItems.forEach(li => {
+            li.classList.remove('active');
+            const link = li.querySelector('a');
+            if (link && link.getAttribute('href').includes(current)) {
+                li.classList.add('active');
+            }
+        });
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     initCursor();
     initParticles();
     initObserver();
     initNightmareEngine();
-    initGhostlyRotator();
-    initMetadataEngine();
-
-    // Navbar Scroll Effect
-    window.addEventListener('scroll', () => {
-        const nav = document.querySelector('.sticky-nav');
-        if (nav) {
-            if (window.scrollY > 50) {
-                nav.style.padding = '10px 0';
-                nav.style.background = 'rgba(0, 0, 0, 0.9)';
-            } else {
-                nav.style.padding = '15px 0';
-                nav.style.background = 'rgba(0, 0, 0, 0.8)';
-            }
-        }
-    });
+    // initMetadataEngine(); // Disabled for Madison decluttering
+    initMadisonRoleCycler();
+    initMadisonNameDrip();
+    initScrollSpy();
 
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'mystic') {
@@ -503,6 +623,33 @@ document.addEventListener('DOMContentLoaded', () => {
         if (icon) icon.classList.replace('fa-moon', 'fa-fire-alt');
         updateContent('mystic');
     }
+
+    // --- Parallax Effect ---
+    window.addEventListener('scroll', () => {
+        if (!document.body.classList.contains('premium-mode')) return;
+        const portrait = document.getElementById('madison-portrait');
+        if (portrait) {
+            const scroll = window.pageYOffset;
+            portrait.parentElement.style.transform = `translateX(-50%) translateY(${scroll * 0.1}px)`;
+        }
+    });
+
+    // --- Superpowers Observer ---
+    const skillBars = document.querySelectorAll('.skill-bar');
+    const skillObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const bar = entry.target;
+                const width = bar.parentElement.nextElementSibling ? bar.parentElement.style.width : bar.style.getPropertyValue('width');
+                // We'll use a data attribute or inline style set in HTML
+                const targetWidth = bar.getAttribute('style').match(/width:\s*(\d+)%/)[1];
+                bar.style.width = targetWidth + '%';
+                skillObserver.unobserve(bar);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    skillBars.forEach(bar => skillObserver.observe(bar));
 });
 
 // --- Tab Management ---
@@ -518,13 +665,430 @@ function opentab(event, tabname) {
     if (targetTab) targetTab.classList.add("active-tab");
 }
 
-// --- Menu Management ---
-function openmenu() {
-    const sidemenu = document.getElementById("sidemenu");
-    if (sidemenu) sidemenu.style.right = "0";
+// --- Mode-2 Horror Interaction ---
+document.addEventListener('click', (e) => {
+    if (!document.body.classList.contains('mystic-mode')) return;
+
+    // Trigger on any click on the page for maximum effect, or limit to buttons
+    // User asked for "click any buttons", but global click is more "fun". let's stick to buttons + general if empty.
+    if (e.target.closest('.btn') || e.target.closest('.btn-glossy') || e.target.closest('a')) {
+        createHorrorEffect(e.pageX, e.pageY);
+    }
+});
+
+function createHorrorEffect(x, y) {
+    // 50% chance of Ghost Fly-out, 50% Blood Drip
+    const isGhost = Math.random() > 0.5;
+
+    if (isGhost) {
+        const ghost = document.createElement('div');
+        ghost.innerText = '👻';
+        ghost.style.position = 'absolute';
+        ghost.style.left = `${x}px`;
+        ghost.style.top = `${y}px`;
+        ghost.style.fontSize = '24px';
+        ghost.style.pointerEvents = 'none';
+        ghost.style.transition = 'all 1s ease-out';
+        ghost.style.zIndex = '10000';
+        ghost.style.opacity = '1';
+        document.body.appendChild(ghost);
+
+        requestAnimationFrame(() => {
+            ghost.style.transform = `translate(${Math.random() * 100 - 50}px, -100px) scale(1.5)`;
+            ghost.style.opacity = '0';
+        });
+
+        setTimeout(() => ghost.remove(), 1000);
+    } else {
+        // Blood Drip
+        for (let i = 0; i < 3; i++) {
+            const drop = document.createElement('div');
+            drop.classList.add('blood-drip');
+            drop.style.left = `${x + (Math.random() * 20 - 10)}px`;
+            drop.style.top = `${y}px`;
+            document.body.appendChild(drop);
+            setTimeout(() => drop.remove(), 1000);
+        }
+    }
 }
 
-function closemenu() {
-    const sidemenu = document.getElementById("sidemenu");
-    if (sidemenu) sidemenu.style.right = "-200px";
+// --- Ghost Text Rotator (Mode-2) ---
+class GhostRotator {
+    constructor(el) {
+        this.el = el;
+        this.phrases = [
+            "To Code from the Shadows",
+            "Crafting dark-themed experiences",
+            "Turning nightmares into neat logic",
+            "Summoning clean code from chaos",
+            "To Code from the Shadows",
+            "Hearing real ghost-stories",
+            "Building eerie yet elegant systems",
+            "Debugging haunted codebases"
+        ];
+        this.currentIdx = 0;
+        this.scramble = new TextScramble(this.el);
+        this.interval = null;
+    }
+
+    start() {
+        if (this.interval) return;
+        this.interval = setInterval(() => {
+            if (!document.body.classList.contains('mystic-mode')) return;
+
+            this.currentIdx = (this.currentIdx + 1) % this.phrases.length;
+            this.scramble.setText(this.phrases[this.currentIdx], true); // true for horror glitch
+        }, 4000); // Rotate every 4 seconds
+    }
+
+    stop() {
+        clearInterval(this.interval);
+        this.interval = null;
+    }
 }
+
+// Initialize Rotator
+let ghostRotator;
+
+function updateRotatorState() {
+    const isMystic = document.body.classList.contains('mystic-mode');
+    const ghostlyEl = document.getElementById('ghostly-rotator');
+
+    if (isMystic) {
+        if (ghostlyEl && !ghostRotator) {
+            ghostRotator = new GhostRotator(ghostlyEl);
+        }
+        if (ghostRotator) ghostRotator.start();
+    } else {
+        if (ghostRotator) ghostRotator.stop();
+    }
+}
+
+// Initial Check
+updateRotatorState();
+
+// Hook into Toggle Theme
+const rotatorObserver = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'class') {
+            updateRotatorState();
+        }
+    });
+});
+rotatorObserver.observe(document.body, { attributes: true });
+
+// ========================================
+// MYSTIC MODE: CINEMATIC ROTATING TEXT
+// Ritualistic, Irregular, Psychologically Present
+// ========================================
+
+const hauntedStatements = [
+    'building systems that remember',
+    'engineering inevitability',
+    'designing order inside darkness',
+    'working where others hesitate',
+    'crafting software with intent',
+    'quietly mastering complex machines',
+    'control, depth, precision',
+    'systems that outlive noise'
+];
+
+let currentStatementIndex = 0;
+let rotationTimeout;
+
+function rotateHauntedText() {
+    // Only run in Mystic mode
+    if (!document.body.classList.contains('mystic-mode')) return;
+
+    const rotatingEl = document.getElementById('mystic-rotating-text');
+    if (!rotatingEl) return;
+
+    // Fade out with subtle micro-disturbance
+    rotatingEl.classList.add('fade-out');
+
+    setTimeout(() => {
+        // Change text
+        currentStatementIndex = (currentStatementIndex + 1) % hauntedStatements.length;
+        rotatingEl.textContent = hauntedStatements[currentStatementIndex];
+
+        // Remove fade-out, trigger fade-in
+        rotatingEl.classList.remove('fade-out');
+        rotatingEl.classList.add('fade-in');
+
+        setTimeout(() => {
+            rotatingEl.classList.remove('fade-in');
+        }, 1200);
+
+    }, 1000); // Fade-out duration
+
+    // Schedule next rotation with randomized timing (±15%)
+    const baseDelay = 5000; // 5 seconds display
+    const randomFactor = 0.85 + (Math.random() * 0.3); // 0.85 to 1.15
+    const nextDelay = baseDelay * randomFactor;
+
+    rotationTimeout = setTimeout(rotateHauntedText, nextDelay);
+}
+
+// Start rotation after initial appearance (4 seconds after page load)
+function initCinematicHero() {
+    if (document.body.classList.contains('mystic-mode')) {
+        setTimeout(() => {
+            rotateHauntedText();
+        }, 4000); // Wait for initial animations to complete
+    }
+}
+
+// Initialize on page load
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCinematicHero);
+} else {
+    initCinematicHero();
+}
+
+// Reinitialize when switching to Mystic mode
+const cinematicObserver = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'class') {
+            const isMystic = document.body.classList.contains('mystic-mode');
+            if (isMystic) {
+                clearTimeout(rotationTimeout);
+                setTimeout(rotateHauntedText, 4000);
+            } else {
+                clearTimeout(rotationTimeout);
+            }
+        }
+    });
+});
+cinematicObserver.observe(document.body, { attributes: true });
+
+// ========================================
+// RITUAL KNIFE NAVIGATION (MYSTIC MODE)
+// Premium, Ritualistic, Elite Horror
+// ========================================
+
+let ritualMenuActive = false;
+
+function initRitualKnifeNav() {
+    const knifeTrigger = document.getElementById('knife-trigger');
+    const knifeContainer = document.querySelector('.knife-container');
+    const incisionLine = document.getElementById('incision-line');
+    const ritualMenu = document.getElementById('ritual-menu');
+    const menuItems = document.querySelectorAll('.ritual-menu-item');
+    const bloodDripsContainer = document.getElementById('blood-drips');
+    const knifeLabel = document.getElementById('knife-label');
+
+    if (!knifeTrigger || !ritualMenu) return;
+
+    // Knife click handler - Pierce and reveal menu
+    knifeTrigger.addEventListener('click', () => {
+        if (!document.body.classList.contains('mystic-mode')) return;
+
+        if (!ritualMenuActive) {
+            pierceAndReveal();
+        } else {
+            collapseMenu();
+        }
+    });
+
+    // Menu item click handlers
+    menuItems.forEach((item, index) => {
+        item.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = item.getAttribute('href');
+            const label = item.getAttribute('data-label');
+
+            // Update knife label
+            if (knifeLabel) {
+                knifeLabel.textContent = label;
+            }
+
+            // Collapse menu
+            collapseMenu();
+
+            // Navigate after animation
+            setTimeout(() => {
+                document.querySelector(targetId)?.scrollIntoView({ behavior: 'smooth' });
+            }, 800);
+        });
+    });
+
+    // Pierce and reveal function
+    function pierceAndReveal() {
+        ritualMenuActive = true;
+
+        // 1. Knife pierces (slides right)
+        knifeContainer.classList.add('piercing');
+
+        setTimeout(() => {
+            // 2. Incision line appears
+            incisionLine.classList.add('active');
+
+            setTimeout(() => {
+                // 3. Menu overlay fades in
+                ritualMenu.classList.add('active');
+
+                // 4. Reveal menu items sequentially with blood drips
+                revealMenuItems();
+            }, 300);
+        }, 500);
+    }
+
+    // Reveal menu items with staggered animation and blood drips
+    function revealMenuItems() {
+        menuItems.forEach((item, index) => {
+            // Irregular timing for psychological effect
+            const baseDelay = 700;
+            const randomFactor = 0.9 + (Math.random() * 0.2); // 0.9 to 1.1
+            const delay = baseDelay * index * randomFactor;
+
+            setTimeout(() => {
+                // Reveal menu item
+                item.classList.add('revealed');
+
+                // Create blood drip after item appears
+                setTimeout(() => {
+                    createBloodDrip(item, index);
+                }, 150);
+            }, delay);
+        });
+    }
+
+    // Create blood drip effect
+    function createBloodDrip(menuItem, index) {
+        if (!bloodDripsContainer) return;
+
+        // Get position from menu item
+        const rect = menuItem.getBoundingClientRect();
+        const centerX = rect.left + (rect.width / 2);
+        const startY = rect.top - 20;
+
+        // Create blood drip element
+        const drip = document.createElement('div');
+        drip.className = 'blood-drip';
+        drip.style.left = `${centerX}px`;
+        drip.style.top = `${startY}px`;
+
+        bloodDripsContainer.appendChild(drip);
+
+        // Create blood streak on incision
+        createBloodStreak(centerX);
+
+        // Remove drip after animation completes
+        setTimeout(() => {
+            drip.remove();
+        }, 2500);
+    }
+
+    // Create blood streak effect on incision line
+    function createBloodStreak(x) {
+        const streak = document.createElement('div');
+        streak.className = 'blood-streak';
+        streak.style.left = `${x - 10}px`;
+        streak.style.top = '50%';
+        streak.style.width = '20px';
+
+        document.body.appendChild(streak);
+
+        setTimeout(() => {
+            streak.remove();
+        }, 3000);
+    }
+
+    // Collapse menu
+    function collapseMenu() {
+        ritualMenuActive = false;
+
+        // 1. Fade out menu items first
+        menuItems.forEach((item, index) => {
+            setTimeout(() => {
+                item.classList.remove('revealed');
+            }, index * 80);
+        });
+
+        setTimeout(() => {
+            // 2. Clear blood drips by removing all child nodes
+            if (bloodDripsContainer) {
+                while (bloodDripsContainer.firstChild) {
+                    bloodDripsContainer.removeChild(bloodDripsContainer.firstChild);
+                }
+            }
+
+            // 3. Fade out menu overlay
+            ritualMenu.classList.remove('active');
+
+            setTimeout(() => {
+                // 4. Incision seals
+                incisionLine.classList.remove('active');
+
+                // 5. Knife retracts
+                knifeContainer.classList.remove('piercing');
+            }, 400);
+        }, menuItems.length * 80 + 200);
+    }
+
+    // Close menu on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && ritualMenuActive) {
+            collapseMenu();
+        }
+    });
+
+    // Update knife label based on current section
+    const sections = document.querySelectorAll('section, div[id]');
+    const sectionLabels = {
+        'header': 'Sanctum',
+        'about': 'The Engineer',
+        'portfolio': 'Artifacts',
+        'contact': 'Summoning'
+    };
+
+    window.addEventListener('scroll', () => {
+        if (!document.body.classList.contains('mystic-mode')) return;
+        if (ritualMenuActive) return; // Don't update while menu is open
+
+        let current = 'Sanctum';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+                const sectionId = section.getAttribute('id');
+                if (sectionLabels[sectionId]) {
+                    current = sectionLabels[sectionId];
+                }
+            }
+        });
+
+        if (knifeLabel && knifeLabel.textContent !== current) {
+            knifeLabel.textContent = current;
+        }
+    });
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', initRitualKnifeNav);
+
+// Reinitialize when switching to Mystic mode
+const knifeObserver = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'class') {
+            const isMystic = document.body.classList.contains('mystic-mode');
+            if (isMystic) {
+                // Reset menu state when switching to mystic mode
+                const ritualMenu = document.getElementById('ritual-menu');
+                const knifeContainer = document.querySelector('.knife-container');
+                const incisionLine = document.getElementById('incision-line');
+
+                if (ritualMenu) ritualMenu.classList.remove('active');
+                if (knifeContainer) knifeContainer.classList.remove('piercing');
+                if (incisionLine) incisionLine.classList.remove('active');
+
+                document.querySelectorAll('.ritual-menu-item').forEach(item => {
+                    item.classList.remove('revealed');
+                });
+
+                ritualMenuActive = false;
+            }
+        }
+    });
+});
+knifeObserver.observe(document.body, { attributes: true });
