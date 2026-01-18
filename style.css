@@ -2262,13 +2262,30 @@ body.premium-mode .elite-main-heading {
 
 /* Ensure all sections float above background in Premium mode */
 body.premium-mode #header,
+body.premium-mode .elite-hero-section,
 body.premium-mode #about,
 body.premium-mode #services,
 body.premium-mode #portfolio,
 body.premium-mode #contact {
-    background: transparent;
+    background: transparent !important;
+    background-image: none !important;
+    background-color: transparent !important;
     position: relative;
     z-index: 1;
+}
+
+/* Remove all section-specific pseudo-element backgrounds in Premium mode */
+body.premium-mode #header::before,
+body.premium-mode #header::after,
+body.premium-mode .elite-hero-section::before,
+body.premium-mode .elite-hero-section::after,
+body.premium-mode #about::before,
+body.premium-mode #about::after,
+body.premium-mode #portfolio::before,
+body.premium-mode #portfolio::after,
+body.premium-mode #contact::before,
+body.premium-mode #contact::after {
+    display: none !important;
 }
 
 /* --- About Section Redesign --- */
