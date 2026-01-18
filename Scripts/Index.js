@@ -1092,3 +1092,62 @@ const knifeObserver = new MutationObserver((mutations) => {
     });
 });
 knifeObserver.observe(document.body, { attributes: true });
+
+// ========================================
+// MYSTIC MODE: ARTIFACT ARCHIVE SUMMONING
+// Scroll-triggered reveal with irregular timing
+// ========================================
+
+function initArtifactSummoning() {
+    const artifactCards = document.querySelectorAll('.artifact-card');
+    if (!artifactCards.length) return;
+
+    const summoningObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting && document.body.classList.contains('mystic-mode')) {
+                const card = entry.target;
+                const cardIndex = parseInt(card.getAttribute('data-artifact')) - 1;
+
+                // Irregular timing for organic feel (150-300ms stagger)
+                const baseDelay = 200;
+                const randomFactor = 0.75 + (Math.random() * 0.5); // 0.75 to 1.25
+                const delay = baseDelay * cardIndex * randomFactor;
+
+                setTimeout(() => {
+                    card.classList.add('summoned');
+                }, delay);
+
+                // Only observe once
+                summoningObserver.unobserve(card);
+            }
+        });
+    }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -100px 0px'
+    });
+
+    artifactCards.forEach(card => {
+        summoningObserver.observe(card);
+    });
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', initArtifactSummoning);
+
+// Reinitialize when switching to Mystic mode
+const artifactObserver = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'class') {
+            const isMystic = document.body.classList.contains('mystic-mode');
+            if (isMystic) {
+                // Reset cards and reinitialize
+                const cards = document.querySelectorAll('.artifact-card');
+                cards.forEach(card => {
+                    card.classList.remove('summoned');
+                });
+                setTimeout(initArtifactSummoning, 100);
+            }
+        }
+    });
+});
+artifactObserver.observe(document.body, { attributes: true });

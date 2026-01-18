@@ -3329,6 +3329,456 @@ body.mystic-mode .service-card {
     overflow: hidden;
 }
 
+/* ===================================
+   MYSTIC MODE: HAUNTED ARTIFACT ARCHIVE
+   Premium, Cinematic, Elite Horror
+   =================================== */
+
+/* Hide/Show based on mode */
+body.mystic-mode .premium-projects-section {
+    display: none;
+}
+
+body.premium-mode .mystic-artifact-archive {
+    display: none;
+}
+
+/* Artifact Archive Container */
+.mystic-artifact-archive {
+    padding: 120px 0;
+    position: relative;
+    background: transparent;
+}
+
+.mystic-artifact-archive .container {
+    max-width: 1200px;
+    position: relative;
+}
+
+/* Ambient Grain Overlay */
+.ambient-grain {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    animation: grain-drift 40s linear infinite;
+}
+
+@keyframes grain-drift {
+    0% { transform: translate(0, 0); }
+    25% { transform: translate(2%, -2%); }
+    50% { transform: translate(-2%, 2%); }
+    75% { transform: translate(3%, -1%); }
+    100% { transform: translate(0, 0); }
+}
+
+/* Archive Header */
+.archive-header {
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+.archive-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(40px, 6vw, 72px);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: #CFCFCF;
+    margin: 0 0 20px 0;
+    text-transform: lowercase;
+    position: relative;
+}
+
+.archive-title::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #7A1622, transparent);
+    opacity: 0.6;
+}
+
+.archive-intro {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    color: #9A9A9A;
+    letter-spacing: 0.05em;
+    opacity: 0.7;
+}
+
+/* Artifact Grid */
+.artifact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: 60px;
+    row-gap: 80px;
+    margin-bottom: 80px;
+}
+
+/* Individual Artifact Card */
+.artifact-card {
+    position: relative;
+    background: rgba(17, 18, 21, 0.18);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid #1C1F24;
+    border-radius: 10px;
+    padding: 40px;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    opacity: 0;
+    transform: translateY(30px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+}
+
+/* Staggered reveal animation */
+.artifact-card.summoned {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Irregular vertical offsets for ritual asymmetry */
+.artifact-card[data-artifact="1"] {
+    margin-top: 0;
+}
+
+.artifact-card[data-artifact="2"] {
+    margin-top: 40px;
+}
+
+.artifact-card[data-artifact="3"] {
+    margin-top: -20px;
+}
+
+.artifact-card[data-artifact="4"] {
+    margin-top: 30px;
+}
+
+/* Shadow Breathing Effect */
+.artifact-shadow-breath {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 120%;
+    height: 120%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(122, 22, 34, 0.08) 0%, transparent 70%);
+    opacity: 0;
+    pointer-events: none;
+    z-index: -1;
+    animation: shadow-breathe 28s ease-in-out infinite;
+}
+
+@keyframes shadow-breathe {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.05);
+        opacity: 0.4;
+    }
+}
+
+/* Hover State */
+.artifact-card:hover {
+    background: rgba(17, 18, 21, 0.28);
+    border-color: #2A2E34;
+    box-shadow:
+        0 16px 48px rgba(0, 0, 0, 0.8),
+        0 0 0 1px rgba(207, 207, 207, 0.1);
+    transform: translateY(-8px) rotateX(1deg);
+}
+
+.artifact-card:hover .artifact-shadow-breath {
+    animation-duration: 12s;
+}
+
+/* Edge Glow on Hover */
+.artifact-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 10px;
+    padding: 1px;
+    background: linear-gradient(135deg,
+        rgba(207, 207, 207, 0.2) 0%,
+        rgba(122, 22, 34, 0.1) 50%,
+        rgba(207, 207, 207, 0.2) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.artifact-card:hover::before {
+    opacity: 1;
+}
+
+/* Artifact Content */
+.artifact-content {
+    position: relative;
+    z-index: 1;
+}
+
+/* Artifact Header */
+.artifact-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.artifact-year {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    color: #7A1622;
+    text-transform: uppercase;
+    opacity: 0.8;
+}
+
+.artifact-sigil {
+    font-size: 16px;
+    color: #9A9A9A;
+    opacity: 0.5;
+    transition: all 0.3s ease;
+}
+
+.artifact-card:hover .artifact-sigil {
+    color: #CFCFCF;
+    opacity: 1;
+    transform: rotate(90deg);
+}
+
+/* Artifact Name */
+.artifact-name {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(24px, 3vw, 32px);
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: #CFCFCF;
+    margin: 0 0 18px 0;
+    line-height: 1.3;
+    transition: color 0.3s ease;
+}
+
+.artifact-card:hover .artifact-name {
+    color: #E0E0E0;
+}
+
+/* Artifact Description */
+.artifact-description {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: #BEBEBE;
+    margin-bottom: 24px;
+    opacity: 0.85;
+}
+
+/* Tech Marks */
+.artifact-tech-marks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 24px;
+}
+
+.tech-mark {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: #BEBEBE;
+    background: rgba(190, 190, 190, 0.06);
+    border: 1px solid rgba(190, 190, 190, 0.1);
+    padding: 6px 14px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.artifact-card:hover .tech-mark {
+    background: rgba(122, 22, 34, 0.08);
+    border-color: rgba(122, 22, 34, 0.2);
+    color: #CFCFCF;
+}
+
+/* Blood Line Accent */
+.artifact-blood-line {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(122, 22, 34, 0.3) 50%,
+        transparent 100%);
+    margin: 24px 0;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.artifact-card:hover .artifact-blood-line {
+    opacity: 1;
+}
+
+/* Artifact Link */
+.artifact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: #9A9A9A;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.artifact-link::before {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: #7A1622;
+    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.artifact-card:hover .artifact-link {
+    color: #CFCFCF;
+}
+
+.artifact-card:hover .artifact-link::before {
+    width: 100%;
+}
+
+.link-arrow {
+    transition: transform 0.3s ease;
+}
+
+.artifact-card:hover .link-arrow {
+    transform: translateX(4px);
+}
+
+/* Archive Footer */
+.archive-footer {
+    text-align: center;
+    margin-top: 80px;
+    padding-top: 60px;
+    border-top: 1px solid rgba(122, 22, 34, 0.15);
+}
+
+.archive-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Cinzel', serif;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    color: #9A9A9A;
+    text-decoration: none;
+    text-transform: lowercase;
+    transition: all 0.4s ease;
+    position: relative;
+}
+
+.archive-cta::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #7A1622, transparent);
+    transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.archive-cta:hover {
+    color: #CFCFCF;
+}
+
+.archive-cta:hover::after {
+    width: 100%;
+}
+
+.cta-sigil {
+    font-size: 18px;
+    opacity: 0.6;
+    transition: all 0.3s ease;
+}
+
+.archive-cta:hover .cta-sigil {
+    opacity: 1;
+    transform: rotate(180deg);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .mystic-artifact-archive {
+        padding: 80px 0;
+    }
+
+    .archive-header {
+        margin-bottom: 60px;
+    }
+
+    .artifact-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+
+    .artifact-card {
+        padding: 30px;
+    }
+
+    /* Remove irregular offsets on mobile */
+    .artifact-card[data-artifact="1"],
+    .artifact-card[data-artifact="2"],
+    .artifact-card[data-artifact="3"],
+    .artifact-card[data-artifact="4"] {
+        margin-top: 0;
+    }
+
+    .artifact-name {
+        font-size: 24px;
+    }
+
+    .artifact-description {
+        font-size: 14px;
+    }
+}
+
+/* --- Portfolio Premium Redesign --- */
+#portfolio {
+    background: radial-gradient(circle at top center, rgba(30, 30, 40, 0.4) 0%, rgba(0, 0, 0, 1) 80%);
+    padding: 100px 0;
+    position: relative;
+    overflow: hidden;
+}
+
 .portfolio-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
