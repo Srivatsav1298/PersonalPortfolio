@@ -1151,3 +1151,62 @@ const artifactObserver = new MutationObserver((mutations) => {
     });
 });
 artifactObserver.observe(document.body, { attributes: true });
+
+// ========================================
+// PREMIUM MODE: COMPACT PROJECTS REVEAL
+// Scroll-triggered micro animations
+// ========================================
+
+function initPremiumProjectsReveal() {
+    const premiumCards = document.querySelectorAll('.premium-project-card');
+    if (!premiumCards.length) return;
+
+    const premiumObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting && document.body.classList.contains('premium-mode')) {
+                const card = entry.target;
+                const cardIndex = parseInt(card.getAttribute('data-project')) - 1;
+
+                // Compact, minimal stagger (50-100ms)
+                const baseDelay = 80;
+                const randomFactor = 0.9 + (Math.random() * 0.2); // 0.9 to 1.1
+                const delay = baseDelay * cardIndex * randomFactor;
+
+                setTimeout(() => {
+                    card.classList.add('revealed');
+                }, delay);
+
+                // Only observe once
+                premiumObserver.unobserve(card);
+            }
+        });
+    }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
+    });
+
+    premiumCards.forEach(card => {
+        premiumObserver.observe(card);
+    });
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', initPremiumProjectsReveal);
+
+// Reinitialize when switching to Premium mode
+const premiumProjectsObserver = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'class') {
+            const isPremium = document.body.classList.contains('premium-mode');
+            if (isPremium) {
+                // Reset cards and reinitialize
+                const cards = document.querySelectorAll('.premium-project-card');
+                cards.forEach(card => {
+                    card.classList.remove('revealed');
+                });
+                setTimeout(initPremiumProjectsReveal, 100);
+            }
+        }
+    });
+});
+premiumProjectsObserver.observe(document.body, { attributes: true });
