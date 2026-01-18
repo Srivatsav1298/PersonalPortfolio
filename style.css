@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;700&family=Crimson+Pro:wght@300;400;600&family=Eater&family=Creepster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;500;600;700&family=Crimson+Pro:wght@300;400;600&family=Eater&family=Creepster&family=Cormorant+Garamond:wght@300;400;500;600&display=swap');
 
 :root {
     /* Elite Charcoal Design System (Mode-1) - Enhanced */
@@ -121,6 +121,120 @@ body.mystic-mode #portfolio::after,
 body.mystic-mode #contact::before,
 body.mystic-mode #contact::after {
     display: none !important;
+}
+
+/* ===================================
+   MYSTIC MODE: CINEMATIC HERO SECTION
+   Ritualistic, Silent, Psychologically Present
+   =================================== */
+
+body.mystic-mode .mystic-cinematic-hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    padding: 0 5%;
+}
+
+body.mystic-mode .mystic-hero-content {
+    max-width: 900px;
+    text-align: center;
+}
+
+/* Identity Line - Modern, Controlled, Human */
+body.mystic-mode .mystic-identity {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: clamp(38px, 5vw, 56px);
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: #E6E6E6; /* Bone White */
+    margin: 0 0 32px 0;
+    opacity: 0;
+    animation: identityAppear 1s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
+}
+
+@keyframes identityAppear {
+    0% {
+        opacity: 0;
+        filter: blur(4px);
+    }
+    100% {
+        opacity: 1;
+        filter: blur(0);
+    }
+}
+
+/* Anchor Line - Quieter, Static */
+body.mystic-mode .mystic-anchor {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: clamp(18px, 2vw, 22px);
+    font-weight: 400;
+    color: #9A9A9A; /* Ash Gray */
+    margin: 0 0 10px 0;
+    opacity: 0;
+    animation: anchorFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) 1.8s forwards;
+}
+
+@keyframes anchorFadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0.78;
+    }
+}
+
+/* Rotating Haunted Statements - Ritual Serif */
+body.mystic-mode .mystic-rotating {
+    font-family: 'Cinzel', 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 3.5vw, 38px);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: #CFCFCF; /* Spectral Ivory */
+    margin: 0;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    filter: blur(8px);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+    animation: rotatingAppear 1.2s cubic-bezier(0.16, 1, 0.3, 1) 3s forwards;
+    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes rotatingAppear {
+    0% {
+        opacity: 0;
+        filter: blur(8px);
+        transform: translateY(5px);
+    }
+    100% {
+        opacity: 1;
+        filter: blur(0);
+        transform: translateY(0);
+    }
+}
+
+/* Rotating text transition states - Applied via JavaScript */
+body.mystic-mode .mystic-rotating.fade-out {
+    opacity: 0;
+    filter: blur(6px);
+    transform: translateY(-3px) translateX(1px);
+}
+
+body.mystic-mode .mystic-rotating.fade-in {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0) translateX(0);
+}
+
+/* Hide in Premium Mode */
+body.premium-mode .mystic-cinematic-hero {
+    display: none;
 }
 
 * {

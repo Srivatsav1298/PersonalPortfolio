@@ -776,3 +776,87 @@ const rotatorObserver = new MutationObserver((mutations) => {
     });
 });
 rotatorObserver.observe(document.body, { attributes: true });
+
+// ========================================
+// MYSTIC MODE: CINEMATIC ROTATING TEXT
+// Ritualistic, Irregular, Psychologically Present
+// ========================================
+
+const hauntedStatements = [
+    'building systems that remember',
+    'engineering inevitability',
+    'designing order inside darkness',
+    'working where others hesitate',
+    'crafting software with intent',
+    'quietly mastering complex machines',
+    'control, depth, precision',
+    'systems that outlive noise'
+];
+
+let currentStatementIndex = 0;
+let rotationTimeout;
+
+function rotateHauntedText() {
+    // Only run in Mystic mode
+    if (!document.body.classList.contains('mystic-mode')) return;
+
+    const rotatingEl = document.getElementById('mystic-rotating-text');
+    if (!rotatingEl) return;
+
+    // Fade out with subtle micro-disturbance
+    rotatingEl.classList.add('fade-out');
+
+    setTimeout(() => {
+        // Change text
+        currentStatementIndex = (currentStatementIndex + 1) % hauntedStatements.length;
+        rotatingEl.textContent = hauntedStatements[currentStatementIndex];
+
+        // Remove fade-out, trigger fade-in
+        rotatingEl.classList.remove('fade-out');
+        rotatingEl.classList.add('fade-in');
+
+        setTimeout(() => {
+            rotatingEl.classList.remove('fade-in');
+        }, 1200);
+
+    }, 1000); // Fade-out duration
+
+    // Schedule next rotation with randomized timing (±15%)
+    const baseDelay = 5000; // 5 seconds display
+    const randomFactor = 0.85 + (Math.random() * 0.3); // 0.85 to 1.15
+    const nextDelay = baseDelay * randomFactor;
+
+    rotationTimeout = setTimeout(rotateHauntedText, nextDelay);
+}
+
+// Start rotation after initial appearance (4 seconds after page load)
+function initCinematicHero() {
+    if (document.body.classList.contains('mystic-mode')) {
+        setTimeout(() => {
+            rotateHauntedText();
+        }, 4000); // Wait for initial animations to complete
+    }
+}
+
+// Initialize on page load
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCinematicHero);
+} else {
+    initCinematicHero();
+}
+
+// Reinitialize when switching to Mystic mode
+const cinematicObserver = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'class') {
+            const isMystic = document.body.classList.contains('mystic-mode');
+            if (isMystic) {
+                clearTimeout(rotationTimeout);
+                setTimeout(rotateHauntedText, 4000);
+            } else {
+                clearTimeout(rotationTimeout);
+            }
+        }
+    });
+});
+cinematicObserver.observe(document.body, { attributes: true });
