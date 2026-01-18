@@ -59,8 +59,8 @@ body.premium-mode::before {
 }
 
 body.mystic-mode {
-    /* Mystic (Subtle Horror) Mode */
-    --bg-color: #030303;
+    /* Mystic (Ritualistic Horror) Mode */
+    --bg-color: #020203; /* Canonical abyss black */
     --text-primary: #a1a1a1;
     --text-secondary: #525252;
     --accent-color: #4a0404;
@@ -70,6 +70,57 @@ body.mystic-mode {
     --font-heading: 'Eater', serif;
     --font-horror: 'Creepster', system-ui;
     --card-border: 1px solid rgba(74, 4, 4, 0.2);
+    background-color: #020203; /* Pure abyss - light-absorbing darkness */
+}
+
+/* Ritual Pulse - Barely Detectable Atmospheric Layer */
+body.mystic-mode::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle at center,
+        rgba(60, 10, 15, 0.02),
+        #020203 68%
+    );
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Ensure all sections float above background in Mystic mode */
+body.mystic-mode #header,
+body.mystic-mode .header-text,
+body.mystic-mode #mystic-hero,
+body.mystic-mode #about,
+body.mystic-mode #services,
+body.mystic-mode #portfolio,
+body.mystic-mode #contact {
+    background: transparent !important;
+    background-image: none !important;
+    background-color: transparent !important;
+    position: relative;
+    z-index: 1;
+}
+
+/* Remove all section-specific pseudo-element backgrounds in Mystic mode */
+body.mystic-mode #header::before,
+body.mystic-mode #header::after,
+body.mystic-mode .header-text::before,
+body.mystic-mode .header-text::after,
+body.mystic-mode #mystic-hero::before,
+body.mystic-mode #mystic-hero::after,
+body.mystic-mode #about::before,
+body.mystic-mode #about::after,
+body.mystic-mode #services::before,
+body.mystic-mode #services::after,
+body.mystic-mode #portfolio::before,
+body.mystic-mode #portfolio::after,
+body.mystic-mode #contact::before,
+body.mystic-mode #contact::after {
+    display: none !important;
 }
 
 * {
@@ -94,24 +145,10 @@ body {
     line-height: 1.6;
 }
 
-/* Background Layer - Hidden in Premium mode (using pure charcoal) */
-body.premium-mode .mesh-gradient {
-    display: none;
-}
-
+/* Background Layer - Hidden in both modes (using pure backgrounds) */
+body.premium-mode .mesh-gradient,
 body.mystic-mode .mesh-gradient {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    background:
-        radial-gradient(circle at 20% 30%, #0F2A2A 0%, transparent 50%),
-        radial-gradient(circle at 80% 70%, #1C4F4A 0%, transparent 50%);
-    opacity: 0.1;
-    filter: blur(80px);
-    animation: meshAmbience 12s ease-in-out infinite alternate;
+    display: none;
 }
 
 @keyframes meshAmbience {
