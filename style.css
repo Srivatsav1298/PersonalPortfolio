@@ -2,7 +2,7 @@
 
 :root {
     /* Elite Charcoal Design System (Mode-1) - Enhanced */
-    --bg-color: #0E0F12;
+    --bg-color: #0B0D10; /* Industry-grade elite charcoal */
     --text-primary: #EDEDED;
     --text-secondary: #B5B8BC;
     --text-muted: #8F9499;
@@ -38,6 +38,24 @@ body.premium-mode {
     --card-border: 1px solid rgba(255, 255, 255, 0.08);
     --card-border-hover: 1px solid rgba(20, 184, 166, 0.2);
     --card-glow: 0 0 32px rgba(20, 184, 166, 0.08);
+    background-color: #0B0D10; /* Pure elite charcoal */
+}
+
+/* Optional subtle elevation for Premium mode */
+body.premium-mode::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle at top center,
+        rgba(110, 140, 170, 0.06),
+        #0B0D10 70%
+    );
+    pointer-events: none;
+    z-index: 0;
 }
 
 body.mystic-mode {
@@ -76,8 +94,12 @@ body {
     line-height: 1.6;
 }
 
-/* Background Animated Mesh Gradient */
-.mesh-gradient {
+/* Background Layer - Hidden in Premium mode (using pure charcoal) */
+body.premium-mode .mesh-gradient {
+    display: none;
+}
+
+body.mystic-mode .mesh-gradient {
     position: fixed;
     top: 0;
     left: 0;
@@ -88,7 +110,6 @@ body {
         radial-gradient(circle at 20% 30%, #0F2A2A 0%, transparent 50%),
         radial-gradient(circle at 80% 70%, #1C4F4A 0%, transparent 50%);
     opacity: 0.1;
-    /* 10% average opacity */
     filter: blur(80px);
     animation: meshAmbience 12s ease-in-out infinite alternate;
 }
@@ -2235,6 +2256,19 @@ body.premium-mode .elite-main-heading {
     padding: 80px 8%;
     max-width: 1400px;
     margin: 0 auto;
+    position: relative;
+    z-index: 1; /* Above background gradient */
+}
+
+/* Ensure all sections float above background in Premium mode */
+body.premium-mode #header,
+body.premium-mode #about,
+body.premium-mode #services,
+body.premium-mode #portfolio,
+body.premium-mode #contact {
+    background: transparent;
+    position: relative;
+    z-index: 1;
 }
 
 /* --- About Section Redesign --- */
