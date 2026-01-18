@@ -1,13 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;700&family=Crimson+Pro:wght@300;400;600&family=Eater&family=Creepster&display=swap');
 
 :root {
-    /* Elite Charcoal Design System (Mode-1) */
+    /* Elite Charcoal Design System (Mode-1) - Enhanced */
     --bg-color: #0E0F12;
     --text-primary: #EDEDED;
     --text-secondary: #B5B8BC;
     --text-muted: #8F9499;
     --text-eyebrow: #9AA0A6;
     --signature-color: #8B8F94;
+
+    /* Enhanced Accent Colors */
+    --accent-teal: #14B8A6;
+    --accent-teal-light: #5EEAD4;
+    --accent-amber: #F59E0B;
+    --accent-amber-light: #FCD34D;
+
+    /* Elevation System */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.12);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.16), 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.20), 0 4px 12px rgba(0, 0, 0, 0.12);
+    --shadow-glow-teal: 0 4px 24px rgba(20, 184, 166, 0.15);
 
     /* Typography - Fluid Scaling */
     --font-heading: clamp(48px, 6vw, 88px);
@@ -24,6 +36,8 @@
 
 body.premium-mode {
     --card-border: 1px solid rgba(255, 255, 255, 0.08);
+    --card-border-hover: 1px solid rgba(20, 184, 166, 0.2);
+    --card-glow: 0 0 32px rgba(20, 184, 166, 0.08);
 }
 
 body.mystic-mode {
@@ -488,20 +502,63 @@ body.mystic-mode {
     }
 }
 
-/* --- Premium Design Utilities --- */
+/* --- Premium Design Utilities - Enhanced Glassmorphism --- */
 .glass-card {
-    background: var(--glass-bg-premium);
+    background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
-    border: 1px solid var(--glass-border-premium);
-    box-shadow: var(--glass-shadow-premium);
-    transition: transform 0.4s var(--transition-smooth), border-color 0.4s var(--transition-smooth), box-shadow 0.4s var(--transition-smooth);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: var(--shadow-md);
+    border-radius: 12px;
+    transition: all 0.4s var(--transition-smooth);
+    position: relative;
+}
+
+.glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 12px;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s var(--transition-smooth);
 }
 
 .glass-card:hover {
-    border-color: rgba(255, 255, 255, 0.15);
+    border-color: rgba(20, 184, 166, 0.2);
     transform: translateY(-5px);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 25px var(--accent-glow);
+    box-shadow: var(--shadow-lg), var(--shadow-glow-teal);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.glass-card:hover::before {
+    opacity: 1;
+}
+
+body.premium-mode .glass-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.20),
+                0 4px 12px rgba(0, 0, 0, 0.12),
+                0 0 32px rgba(20, 184, 166, 0.12);
+}
+
+body.mystic-mode .glass-card {
+    background: rgba(74, 4, 4, 0.08);
+    border-color: rgba(139, 0, 0, 0.2);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+body.mystic-mode .glass-card:hover {
+    border-color: rgba(139, 0, 0, 0.4);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5),
+                0 0 32px rgba(139, 0, 0, 0.15);
 }
 
 /* --- Custom Cursor --- */
@@ -1981,12 +2038,38 @@ body.mystic-mode .btn-glossy:hover {
     transform: translateY(-3px);
 }
 
-/* --- Sections --- */
+/* --- Sections - Enhanced Typography --- */
 .section-title {
     font-size: clamp(32px, 5vw, 48px);
     font-weight: 700;
     margin-bottom: 40px;
-    font-family: var(--font-heading);
+    font-family: var(--font-main);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    color: var(--text-primary);
+}
+
+body.premium-mode .section-title {
+    background: linear-gradient(135deg, var(--text-primary) 0%, rgba(94, 234, 212, 0.8) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 600;
+}
+
+body.premium-mode h1,
+body.premium-mode h2 {
+    letter-spacing: -0.03em;
+}
+
+body.premium-mode .elite-eyebrow {
+    letter-spacing: 0.15em;
+    font-weight: 600;
+}
+
+body.premium-mode .elite-main-heading {
+    letter-spacing: -0.04em;
+    line-height: 1.1;
 }
 
 .container {
@@ -3438,6 +3521,66 @@ body.mystic-mode .service-card {
 @media (min-width: 1024px) {
     .maang-project-item:nth-child(even) .project-description {
         margin-left: auto;
+    }
+}
+
+/* Tech Stack Badges */
+.project-tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.tech-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    backdrop-filter: blur(10px);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tech-badge:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+body.premium-mode .tech-badge {
+    background: rgba(20, 184, 166, 0.08);
+    border-color: rgba(20, 184, 166, 0.2);
+    color: rgba(94, 234, 212, 0.95);
+}
+
+body.premium-mode .tech-badge:hover {
+    background: rgba(20, 184, 166, 0.15);
+    border-color: rgba(20, 184, 166, 0.35);
+    box-shadow: 0 4px 12px rgba(20, 184, 166, 0.15);
+}
+
+body.mystic-mode .tech-badge {
+    background: rgba(74, 4, 4, 0.15);
+    border-color: rgba(139, 0, 0, 0.3);
+    color: rgba(185, 28, 28, 0.9);
+    font-family: 'Crimson Pro', serif;
+}
+
+body.mystic-mode .tech-badge:hover {
+    background: rgba(74, 4, 4, 0.25);
+    border-color: rgba(139, 0, 0, 0.5);
+    box-shadow: 0 4px 12px rgba(139, 0, 0, 0.2);
+}
+
+@media (min-width: 1024px) {
+    .maang-project-item:nth-child(even) .project-tech-stack {
+        justify-content: flex-end;
     }
 }
 
