@@ -591,12 +591,13 @@
 
     <!-- -------------------Contact Section-------------------------------- -->
     <div id="contact" class="reveal">
-        <div class="container maang-contact-container">
+        <!-- PREMIUM MODE: MAANG Contact Section -->
+        <div class="container maang-contact-container premium-contact-section">
             <div class="maang-contact-content">
                 <header class="maang-contact-header">
-                    <h2 class="maang-contact-title section-title">Let’s talk about interesting problems.</h2>
+                    <h2 class="maang-contact-title section-title">Let's talk about interesting problems.</h2>
                     <p class="maang-contact-supporting">
-                        If you’re working on data-heavy software or AI-powered systems where reliability matters, I’d be
+                        If you're working on data-heavy software or AI-powered systems where reliability matters, I'd be
                         glad to connect.
                     </p>
                 </header>
@@ -619,9 +620,88 @@
                         <button type="submit" class="maang-submit-btn">Send message</button>
                     </form>
                     <p class="maang-footer-microcopy">
-                        I read every message and respond when there’s a meaningful overlap.
+                        I read every message and respond when there's a meaningful overlap.
                     </p>
                 </div>
+                <span id="msg"></span>
+            </div>
+        </div>
+
+        <!-- MYSTIC MODE: Ritual Summoning Contact Section -->
+        <div class="mystic-contact-section">
+            <div class="ritual-atmosphere">
+                <!-- Floating fog layers -->
+                <div class="ritual-fog ritual-fog-1"></div>
+                <div class="ritual-fog ritual-fog-2"></div>
+
+                <!-- Ambient grain -->
+                <div class="ritual-grain"></div>
+            </div>
+
+            <div class="container ritual-contact-container">
+                <!-- Summoning Header -->
+                <header class="ritual-header">
+                    <span class="ritual-sigil-top">◈</span>
+                    <h2 class="ritual-title">Initiate Contact</h2>
+                    <div class="ritual-separator"></div>
+                    <p class="ritual-intro">Leave your trace in the dark. I respond when the alignment is right.</p>
+                </header>
+
+                <!-- Ritual Form Chamber -->
+                <div class="ritual-chamber">
+                    <!-- Summoning circle decoration -->
+                    <div class="summoning-circle">
+                        <div class="circle-outer"></div>
+                        <div class="circle-inner"></div>
+                    </div>
+
+                    <form name="submit-to-google-sheet" class="ritual-form">
+                        <!-- Name Input -->
+                        <div class="ritual-input-group">
+                            <label for="ritual-name" class="ritual-label">
+                                <span class="label-sigil">I</span>
+                                <span class="label-text">Identity</span>
+                            </label>
+                            <input type="text" id="ritual-name" name="Name" class="ritual-input" placeholder="Who summons?" required>
+                            <div class="input-blood-line"></div>
+                        </div>
+
+                        <!-- Email Input -->
+                        <div class="ritual-input-group">
+                            <label for="ritual-email" class="ritual-label">
+                                <span class="label-sigil">II</span>
+                                <span class="label-text">Signal</span>
+                            </label>
+                            <input type="email" id="ritual-email" name="Email" class="ritual-input" placeholder="How do I reach the void?" required>
+                            <div class="input-blood-line"></div>
+                        </div>
+
+                        <!-- Message Input -->
+                        <div class="ritual-input-group">
+                            <label for="ritual-message" class="ritual-label">
+                                <span class="label-sigil">III</span>
+                                <span class="label-text">Transmission</span>
+                            </label>
+                            <textarea id="ritual-message" name="Message" class="ritual-input ritual-textarea" rows="6" placeholder="Speak into the darkness..." required></textarea>
+                            <div class="input-blood-line"></div>
+                        </div>
+
+                        <!-- Submit Seal -->
+                        <button type="submit" class="ritual-seal-btn">
+                            <span class="seal-inner">
+                                <span class="seal-sigil">✦</span>
+                                <span class="seal-text">Complete the Ritual</span>
+                                <span class="seal-sigil">✦</span>
+                            </span>
+                            <div class="seal-glow"></div>
+                        </button>
+                    </form>
+
+                    <p class="ritual-footer-text">
+                        Messages are received in silence. Responses emerge when worthy.
+                    </p>
+                </div>
+
                 <span id="msg"></span>
             </div>
         </div>
