@@ -862,13 +862,117 @@ const cinematicObserver = new MutationObserver((mutations) => {
 cinematicObserver.observe(document.body, { attributes: true });
 
 // ========================================
-// RITUAL KNIFE NAVIGATION (MYSTIC MODE)
-// Premium, Ritualistic, Elite Horror
+// HORIZONTAL RITUAL NAVIGATION (MYSTIC MODE)
+// Compact, Premium, Elite Horror - Expands to Right
+// ========================================
+
+function initMysticHorizontalNav() {
+    const trigger = document.getElementById('ritual-trigger');
+    const horizontalBar = document.getElementById('ritual-horizontal-bar');
+    const navLinks = document.querySelectorAll('.ritual-nav-link');
+
+    if (!trigger || !horizontalBar) return;
+
+    let isExpanded = false;
+
+    // Toggle trigger click handler
+    trigger.addEventListener('click', () => {
+        if (!document.body.classList.contains('mystic-mode')) return;
+
+        isExpanded = !isExpanded;
+
+        if (isExpanded) {
+            trigger.classList.add('active');
+            horizontalBar.classList.add('expanded');
+        } else {
+            trigger.classList.remove('active');
+            horizontalBar.classList.remove('expanded');
+        }
+    });
+
+    // Close menu on link click and smooth navigate
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href');
+
+            // Close menu
+            trigger.classList.remove('active');
+            horizontalBar.classList.remove('expanded');
+            isExpanded = false;
+
+            // Navigate after slight delay for animation
+            setTimeout(() => {
+                document.querySelector(targetId)?.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }, 300);
+        });
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && isExpanded) {
+            trigger.classList.remove('active');
+            horizontalBar.classList.remove('expanded');
+            isExpanded = false;
+        }
+    });
+
+    // Update active link based on scroll position
+    const sections = document.querySelectorAll('section, div[id]');
+    window.addEventListener('scroll', () => {
+        if (!document.body.classList.contains('mystic-mode')) return;
+
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            const href = link.getAttribute('href');
+            if (href && href.includes(current)) {
+                link.classList.add('active');
+            }
+        });
+    });
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', initMysticHorizontalNav);
+
+// Reinitialize when switching to Mystic mode
+const horizontalNavObserver = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'class') {
+            const isMystic = document.body.classList.contains('mystic-mode');
+            if (isMystic) {
+                // Reset navigation state
+                const trigger = document.getElementById('ritual-trigger');
+                const horizontalBar = document.getElementById('ritual-horizontal-bar');
+
+                if (trigger) trigger.classList.remove('active');
+                if (horizontalBar) horizontalBar.classList.remove('expanded');
+            }
+        }
+    });
+});
+horizontalNavObserver.observe(document.body, { attributes: true });
+
+// ========================================
+// RITUAL KNIFE NAVIGATION (MYSTIC MODE) - DISABLED
+// Old knife navigation kept for reference
 // ========================================
 
 let ritualMenuActive = false;
 
-function initRitualKnifeNav() {
+function initRitualKnifeNav_DISABLED() {
     const knifeTrigger = document.getElementById('knife-trigger');
     const knifeContainer = document.querySelector('.knife-container');
     const incisionLine = document.getElementById('incision-line');
@@ -1064,11 +1168,11 @@ function initRitualKnifeNav() {
     });
 }
 
-// Initialize on page load
-document.addEventListener('DOMContentLoaded', initRitualKnifeNav);
+// Initialize on page load - DISABLED (replaced with horizontal navigation)
+// document.addEventListener('DOMContentLoaded', initRitualKnifeNav_DISABLED);
 
-// Reinitialize when switching to Mystic mode
-const knifeObserver = new MutationObserver((mutations) => {
+// Reinitialize when switching to Mystic mode - DISABLED
+const knifeObserver_DISABLED = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
         if (mutation.attributeName === 'class') {
             const isMystic = document.body.classList.contains('mystic-mode');
@@ -1091,4 +1195,122 @@ const knifeObserver = new MutationObserver((mutations) => {
         }
     });
 });
-knifeObserver.observe(document.body, { attributes: true });
+// knifeObserver_DISABLED.observe(document.body, { attributes: true }); // DISABLED
+
+// ========================================
+// MYSTIC MODE: ARTIFACT ARCHIVE SUMMONING
+// Scroll-triggered reveal with irregular timing
+// ========================================
+
+function initArtifactSummoning() {
+    const artifactCards = document.querySelectorAll('.artifact-card');
+    if (!artifactCards.length) return;
+
+    const summoningObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting && document.body.classList.contains('mystic-mode')) {
+                const card = entry.target;
+                const cardIndex = parseInt(card.getAttribute('data-artifact')) - 1;
+
+                // Irregular timing for organic feel (150-300ms stagger)
+                const baseDelay = 200;
+                const randomFactor = 0.75 + (Math.random() * 0.5); // 0.75 to 1.25
+                const delay = baseDelay * cardIndex * randomFactor;
+
+                setTimeout(() => {
+                    card.classList.add('summoned');
+                }, delay);
+
+                // Only observe once
+                summoningObserver.unobserve(card);
+            }
+        });
+    }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -100px 0px'
+    });
+
+    artifactCards.forEach(card => {
+        summoningObserver.observe(card);
+    });
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', initArtifactSummoning);
+
+// Reinitialize when switching to Mystic mode
+const artifactObserver = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'class') {
+            const isMystic = document.body.classList.contains('mystic-mode');
+            if (isMystic) {
+                // Reset cards and reinitialize
+                const cards = document.querySelectorAll('.artifact-card');
+                cards.forEach(card => {
+                    card.classList.remove('summoned');
+                });
+                setTimeout(initArtifactSummoning, 100);
+            }
+        }
+    });
+});
+artifactObserver.observe(document.body, { attributes: true });
+
+// ========================================
+// PREMIUM MODE: COMPACT PROJECTS REVEAL
+// Scroll-triggered micro animations
+// ========================================
+
+function initPremiumProjectsReveal() {
+    const premiumCards = document.querySelectorAll('.premium-project-card');
+    if (!premiumCards.length) return;
+
+    const premiumObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting && document.body.classList.contains('premium-mode')) {
+                const card = entry.target;
+                const cardIndex = parseInt(card.getAttribute('data-project')) - 1;
+
+                // Compact, minimal stagger (50-100ms)
+                const baseDelay = 80;
+                const randomFactor = 0.9 + (Math.random() * 0.2); // 0.9 to 1.1
+                const delay = baseDelay * cardIndex * randomFactor;
+
+                setTimeout(() => {
+                    card.classList.add('revealed');
+                }, delay);
+
+                // Only observe once
+                premiumObserver.unobserve(card);
+            }
+        });
+    }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
+    });
+
+    premiumCards.forEach(card => {
+        premiumObserver.observe(card);
+    });
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', initPremiumProjectsReveal);
+
+// Reinitialize when switching to Premium mode
+const premiumProjectsObserver = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'class') {
+            const isPremium = document.body.classList.contains('premium-mode');
+            if (isPremium) {
+                // Reset cards and reinitialize
+                const cards = document.querySelectorAll('.premium-project-card');
+                cards.forEach(card => {
+                    card.classList.remove('revealed');
+                });
+                setTimeout(initPremiumProjectsReveal, 100);
+            }
+        }
+    });
+});
+premiumProjectsObserver.observe(document.body, { attributes: true });

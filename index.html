@@ -58,85 +58,43 @@
                 </ul>
             </nav>
 
-            <!-- Mystic Mode: Ritual Knife Navigation -->
-            <div class="ritual-knife-nav" id="ritual-knife-nav">
-                <div class="knife-container" id="knife-trigger">
-                    <!-- Knife Blade SVG -->
-                    <svg class="ceremonial-knife" viewBox="0 0 200 40" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Blade -->
-                        <defs>
-                            <linearGradient id="blade-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" style="stop-color:#3A3E44;stop-opacity:1" />
-                                <stop offset="10%" style="stop-color:#2B2E34;stop-opacity:1" />
-                                <stop offset="90%" style="stop-color:#1A1D22;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#0E1014;stop-opacity:1" />
-                            </linearGradient>
-                            <linearGradient id="edge-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" style="stop-color:#4A4E54;stop-opacity:0.8" />
-                                <stop offset="100%" style="stop-color:#2B2E34;stop-opacity:0" />
-                            </linearGradient>
-                        </defs>
-
-                        <!-- Main blade body -->
-                        <path d="M 10 20 L 170 18 L 175 20 L 170 22 L 10 20 Z"
-                              fill="url(#blade-gradient)"
-                              class="blade-body"/>
-
-                        <!-- Sharp edge highlight -->
-                        <path d="M 10 18 L 170 17 L 175 20 L 170 18 L 10 18 Z"
-                              fill="url(#edge-gradient)"
-                              class="blade-edge"
-                              opacity="0.6"/>
-
-                        <!-- Knife tip (pointed) -->
-                        <path d="M 170 18 L 190 20 L 170 22 Z"
-                              fill="#2B2E34"
-                              class="blade-tip"/>
-
-                        <!-- Handle -->
-                        <rect x="2" y="17" width="12" height="6"
-                              fill="#1A1D22"
-                              rx="1"/>
-                        <rect x="3" y="18" width="10" height="4"
-                              fill="#2B2E34"
-                              rx="0.5"
-                              opacity="0.5"/>
-                    </svg>
-
-                    <span class="knife-state-label" id="knife-label">Sanctum</span>
+            <!-- Mystic Mode: Horizontal Ritual Navigation -->
+            <div class="mystic-horizontal-nav" id="mystic-horizontal-nav">
+                <!-- Ritual Trigger (Compact Sigil) -->
+                <div class="ritual-trigger" id="ritual-trigger">
+                    <span class="ritual-sigil">◈</span>
                 </div>
 
-                <!-- Incision Line -->
-                <div class="incision-line" id="incision-line"></div>
-
-                <!-- Menu Overlay -->
-                <div class="ritual-menu-overlay" id="ritual-menu">
-                    <nav class="ritual-menu-items">
-                        <a href="#header" class="ritual-menu-item" data-label="Sanctum">
-                            <span class="menu-ritual-text">Home</span>
-                            <span class="menu-ritual-subtext">Sanctum</span>
+                <!-- Horizontal Menu Bar (Expands to Right) -->
+                <div class="ritual-horizontal-bar" id="ritual-horizontal-bar">
+                    <nav class="ritual-nav-items">
+                        <a href="#header" class="ritual-nav-link" data-index="0">
+                            <span class="ritual-link-text">Sanctum</span>
                         </a>
-                        <a href="#about" class="ritual-menu-item" data-label="The Engineer">
-                            <span class="menu-ritual-text">About</span>
-                            <span class="menu-ritual-subtext">The Engineer</span>
+                        <a href="#about" class="ritual-nav-link" data-index="1">
+                            <span class="ritual-link-text">The Engineer</span>
                         </a>
-                        <a href="#portfolio" class="ritual-menu-item" data-label="Artifacts">
-                            <span class="menu-ritual-text">Projects</span>
-                            <span class="menu-ritual-subtext">Artifacts</span>
+                        <a href="#portfolio" class="ritual-nav-link" data-index="2">
+                            <span class="ritual-link-text">Artifacts</span>
                         </a>
-                        <a href="#contact" class="ritual-menu-item" data-label="Summoning">
-                            <span class="menu-ritual-text">Contact</span>
-                            <span class="menu-ritual-subtext">Summoning</span>
+                        <a href="#contact" class="ritual-nav-link" data-index="3">
+                            <span class="ritual-link-text">Summoning</span>
                         </a>
                     </nav>
-
-                    <!-- Blood drip container -->
-                    <div class="blood-drips-container" id="blood-drips"></div>
                 </div>
             </div>
 
             <!-- Right: Actions -->
             <div class="nav-actions">
+                <!-- Premium Mode Action Buttons -->
+                <a href="Images/my-cv.pdf" download class="nav-action-btn" title="Download Resume">
+                    <i class="fas fa-file-pdf"></i>
+                </a>
+                <a href="https://github.com/Srivatsav1298" target="_blank" rel="noopener noreferrer" class="nav-action-btn" title="GitHub Profile">
+                    <i class="fab fa-github"></i>
+                </a>
+
+                <!-- Theme Toggle -->
                 <div id="theme-toggle" onclick="toggleTheme()" title="Toggle Mode" class="nav-theme-toggle">
                     <i class="fas fa-moon" id="toggle-icon"></i>
                 </div>
@@ -389,112 +347,257 @@
 
     <!-- -------------------portfolio-------------------------------- -->
     <div id="portfolio" class="reveal">
-        <div class="container maang-projects-container">
-            <h2 class="maang-section-title section-title">Selected project work</h2>
-            <div class="maang-projects-grid">
+        <!-- MYSTIC MODE: Haunted Artifact Archive -->
+        <div class="mystic-artifact-archive">
+            <div class="container">
+                <!-- Ambient grain overlay -->
+                <div class="ambient-grain"></div>
 
-                <!-- Project 1: AV DANSESTUDIO -->
-                <article class="maang-project-item">
-                    <div class="project-header">
-                        <span class="project-year">2024</span>
-                        <h3 class="project-name">AV Dansestudio</h3>
-                    </div>
-                    <p class="project-description">
-                        A digital platform for classical dance, focused on high-fidelity user interactions and seamless
-                        scheduling. Engineered for reliability and a premium aesthetic.
-                    </p>
-                    <div class="project-tech-stack">
-                        <span class="tech-badge">React</span>
-                        <span class="tech-badge">Node.js</span>
-                        <span class="tech-badge">PostgreSQL</span>
-                        <span class="tech-badge">AWS</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://avdanse.no/" target="_blank" class="text-link">Visit platform</a>
-                    </div>
-                </article>
+                <!-- Archive Header -->
+                <div class="archive-header">
+                    <h2 class="archive-title">Forbidden Artifacts</h2>
+                    <p class="archive-intro">What has been forged in the depths.</p>
+                </div>
 
-                <!-- Project 2: Tennis Connect -->
-                <article class="maang-project-item">
-                    <div class="project-header">
-                        <span class="project-year">2023</span>
-                        <h3 class="project-name">Tennis Connect</h3>
-                    </div>
-                    <p class="project-description">
-                        Scalable infrastructure managing club operations and player registrations across Australia.
-                        Built for peak seasonality and high-concurrency stability.
-                    </p>
-                    <div class="project-tech-stack">
-                        <span class="tech-badge">React</span>
-                        <span class="tech-badge">Python</span>
-                        <span class="tech-badge">SQL Server</span>
-                        <span class="tech-badge">Azure</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://tc.tennis.com.au/" target="_blank" class="text-link">View case study</a>
-                    </div>
-                </article>
+                <!-- Artifact Grid -->
+                <div class="artifact-grid">
+                    <!-- Artifact 1: Financial AI Agent -->
+                    <article class="artifact-card" data-artifact="1">
+                        <div class="artifact-shadow-breath"></div>
+                        <div class="artifact-content">
+                            <div class="artifact-header">
+                                <span class="artifact-year">2025</span>
+                                <span class="artifact-sigil">◈</span>
+                            </div>
+                            <h3 class="artifact-name">Financial AI Agent</h3>
+                            <p class="artifact-description">
+                                An intelligence woven with retrieval-augmented generation. Answers Norwegian financial queries with real-world data from Statistics Norway. Explainable, data-driven, unforgiving.
+                            </p>
+                            <div class="artifact-tech-marks">
+                                <span class="tech-mark">Python</span>
+                                <span class="tech-mark">Llama</span>
+                                <span class="tech-mark">RAG</span>
+                                <span class="tech-mark">Statistics API</span>
+                            </div>
+                            <div class="artifact-blood-line"></div>
+                        </div>
+                        <a href="https://github.com/Srivatsav1298/Financial_AI_ReAct_Agent/tree/main" target="_blank" class="artifact-link">
+                            <span>Examine</span>
+                            <span class="link-arrow">→</span>
+                        </a>
+                    </article>
 
-                <!-- Project 3: Simulated Impact -->
-                <article class="maang-project-item">
-                    <div class="project-header">
-                        <span class="project-year">2022</span>
-                        <h3 class="project-name">Simulated Impact</h3>
-                    </div>
-                    <p class="project-description">
-                        Environmental crisis simulation utilizing predictive modeling for oil spill trajectories.
-                        Optimized for tactical resource deployment and ecological protection.
-                    </p>
-                    <div class="project-tech-stack">
-                        <span class="tech-badge">Python</span>
-                        <span class="tech-badge">Data Science</span>
-                        <span class="tech-badge">Geospatial Analysis</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/Srivatsav1298/INF202_Project" target="_blank"
-                            class="text-link">Source repository</a>
-                    </div>
-                </article>
+                    <!-- Artifact 2: AV Dansestudio -->
+                    <article class="artifact-card" data-artifact="2">
+                        <div class="artifact-shadow-breath"></div>
+                        <div class="artifact-content">
+                            <div class="artifact-header">
+                                <span class="artifact-year">2024</span>
+                                <span class="artifact-sigil">◈</span>
+                            </div>
+                            <h3 class="artifact-name">AV Dansestudio</h3>
+                            <p class="artifact-description">
+                                A digital platform for classical dance. High-fidelity interactions, seamless scheduling. Engineered for reliability, designed for ritual precision.
+                            </p>
+                            <div class="artifact-tech-marks">
+                                <span class="tech-mark">React</span>
+                                <span class="tech-mark">Node.js</span>
+                                <span class="tech-mark">PostgreSQL</span>
+                                <span class="tech-mark">AWS</span>
+                            </div>
+                            <div class="artifact-blood-line"></div>
+                        </div>
+                        <a href="https://avdanse.no/" target="_blank" class="artifact-link">
+                            <span>Examine</span>
+                            <span class="link-arrow">→</span>
+                        </a>
+                    </article>
 
-                <!-- Project 4: Financial AI Agent -->
-                <article class="maang-project-item">
-                    <div class="project-header">
-                        <span class="project-year">2025</span>
-                        <h3 class="project-name">Financial AI Agent</h3>
-                    </div>
-                    <p class="project-description">
-                        AI agent using retrieval-augmented generation (RAG) to answer Norwegian financial queries.
-                        Leveraged real-world data from Statistics Norway to deliver explainable, data-driven insights.
-                    </p>
-                    <div class="project-tech-stack">
-                        <span class="tech-badge">Python</span>
-                        <span class="tech-badge">Llama</span>
-                        <span class="tech-badge">RAG</span>
-                        <span class="tech-badge">Statistics Norway API</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/Srivatsav1298/Financial_AI_ReAct_Agent/tree/main" target="_blank"
-                            class="text-link">Source repository</a>
-                    </div>
-                </article>
+                    <!-- Artifact 3: Tennis Connect -->
+                    <article class="artifact-card" data-artifact="3">
+                        <div class="artifact-shadow-breath"></div>
+                        <div class="artifact-content">
+                            <div class="artifact-header">
+                                <span class="artifact-year">2023</span>
+                                <span class="artifact-sigil">◈</span>
+                            </div>
+                            <h3 class="artifact-name">Tennis Connect</h3>
+                            <p class="artifact-description">
+                                Scalable infrastructure managing club operations across Australia. Built for peak seasonality. Engineered for high-concurrency stability.
+                            </p>
+                            <div class="artifact-tech-marks">
+                                <span class="tech-mark">React</span>
+                                <span class="tech-mark">Python</span>
+                                <span class="tech-mark">SQL Server</span>
+                                <span class="tech-mark">Azure</span>
+                            </div>
+                            <div class="artifact-blood-line"></div>
+                        </div>
+                        <a href="https://tc.tennis.com.au/" target="_blank" class="artifact-link">
+                            <span>Examine</span>
+                            <span class="link-arrow">→</span>
+                        </a>
+                    </article>
 
+                    <!-- Artifact 4: Simulated Impact -->
+                    <article class="artifact-card" data-artifact="4">
+                        <div class="artifact-shadow-breath"></div>
+                        <div class="artifact-content">
+                            <div class="artifact-header">
+                                <span class="artifact-year">2022</span>
+                                <span class="artifact-sigil">◈</span>
+                            </div>
+                            <h3 class="artifact-name">Simulated Impact</h3>
+                            <p class="artifact-description">
+                                Environmental crisis simulation. Predictive modeling for oil spill trajectories. Optimized for tactical resource deployment and ecological protection.
+                            </p>
+                            <div class="artifact-tech-marks">
+                                <span class="tech-mark">Python</span>
+                                <span class="tech-mark">Data Science</span>
+                                <span class="tech-mark">Geospatial</span>
+                            </div>
+                            <div class="artifact-blood-line"></div>
+                        </div>
+                        <a href="https://github.com/Srivatsav1298/INF202_Project" target="_blank" class="artifact-link">
+                            <span>Examine</span>
+                            <span class="link-arrow">→</span>
+                        </a>
+                    </article>
+                </div>
+
+                <!-- Archive Footer -->
+                <div class="archive-footer">
+                    <a href="https://github.com/Srivatsav1298" target="_blank" class="archive-cta">
+                        <span>More in the vault</span>
+                        <span class="cta-sigil">※</span>
+                    </a>
+                </div>
             </div>
+        </div>
 
+        <!-- PREMIUM MODE: Compact SaaS Projects -->
+        <div class="premium-projects-section">
+            <div class="container">
+                <h2 class="premium-projects-title section-title">Selected Work</h2>
+
+                <div class="premium-projects-grid">
+                    <!-- Project 1: Financial AI Agent -->
+                    <article class="premium-project-card" data-project="1">
+                        <div class="premium-card-content">
+                            <div class="premium-project-header">
+                                <span class="premium-project-year">2025</span>
+                            </div>
+                            <h3 class="premium-project-title">Financial AI Agent</h3>
+                            <p class="premium-project-description">
+                                AI agent using RAG to answer Norwegian financial queries with real-world Statistics Norway data.
+                            </p>
+                            <div class="premium-tech-tags">
+                                <span class="premium-tech-tag">Python</span>
+                                <span class="premium-tech-tag">Llama</span>
+                                <span class="premium-tech-tag">RAG</span>
+                                <span class="premium-tech-tag">Statistics API</span>
+                            </div>
+                        </div>
+                        <a href="https://github.com/Srivatsav1298/Financial_AI_ReAct_Agent/tree/main" target="_blank" class="premium-project-link">
+                            <span>View Project</span>
+                            <span class="premium-link-arrow">→</span>
+                        </a>
+                    </article>
+
+                    <!-- Project 2: AV Dansestudio -->
+                    <article class="premium-project-card" data-project="2">
+                        <div class="premium-card-content">
+                            <div class="premium-project-header">
+                                <span class="premium-project-year">2024</span>
+                            </div>
+                            <h3 class="premium-project-title">AV Dansestudio</h3>
+                            <p class="premium-project-description">
+                                Digital platform for classical dance with seamless scheduling and premium user experience.
+                            </p>
+                            <div class="premium-tech-tags">
+                                <span class="premium-tech-tag">React</span>
+                                <span class="premium-tech-tag">Node.js</span>
+                                <span class="premium-tech-tag">PostgreSQL</span>
+                                <span class="premium-tech-tag">AWS</span>
+                            </div>
+                        </div>
+                        <a href="https://avdanse.no/" target="_blank" class="premium-project-link">
+                            <span>View Project</span>
+                            <span class="premium-link-arrow">→</span>
+                        </a>
+                    </article>
+
+                    <!-- Project 3: Tennis Connect -->
+                    <article class="premium-project-card" data-project="3">
+                        <div class="premium-card-content">
+                            <div class="premium-project-header">
+                                <span class="premium-project-year">2023</span>
+                            </div>
+                            <h3 class="premium-project-title">Tennis Connect</h3>
+                            <p class="premium-project-description">
+                                Scalable club management infrastructure serving Australia-wide operations at peak load.
+                            </p>
+                            <div class="premium-tech-tags">
+                                <span class="premium-tech-tag">React</span>
+                                <span class="premium-tech-tag">Python</span>
+                                <span class="premium-tech-tag">SQL Server</span>
+                                <span class="premium-tech-tag">Azure</span>
+                            </div>
+                        </div>
+                        <a href="https://tc.tennis.com.au/" target="_blank" class="premium-project-link">
+                            <span>View Project</span>
+                            <span class="premium-link-arrow">→</span>
+                        </a>
+                    </article>
+
+                    <!-- Project 4: Simulated Impact -->
+                    <article class="premium-project-card" data-project="4">
+                        <div class="premium-card-content">
+                            <div class="premium-project-header">
+                                <span class="premium-project-year">2022</span>
+                            </div>
+                            <h3 class="premium-project-title">Simulated Impact</h3>
+                            <p class="premium-project-description">
+                                Environmental crisis simulation with predictive modeling for oil spill response optimization.
+                            </p>
+                            <div class="premium-tech-tags">
+                                <span class="premium-tech-tag">Python</span>
+                                <span class="premium-tech-tag">Data Science</span>
+                                <span class="premium-tech-tag">Geospatial</span>
+                            </div>
+                        </div>
+                        <a href="https://github.com/Srivatsav1298/INF202_Project" target="_blank" class="premium-project-link">
+                            <span>View Project</span>
+                            <span class="premium-link-arrow">→</span>
+                        </a>
+                    </article>
+                </div>
+
+                <div class="premium-projects-footer">
+                    <a href="https://github.com/Srivatsav1298" target="_blank" class="premium-footer-link">View all projects →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Keep old MAANG-style structure hidden (for reference) -->
+        <div class="maang-projects-section" style="display: none;">
             <div class="projects-footer">
                 <a href="https://github.com/Srivatsav1298" target="_blank" class="maang-cta-link">Full work on
                     GitHub</a>
             </div>
         </div>
+        </div>
     </div>
 
     <!-- -------------------Contact Section-------------------------------- -->
     <div id="contact" class="reveal">
-        <div class="container maang-contact-container">
+        <!-- PREMIUM MODE: MAANG Contact Section -->
+        <div class="container maang-contact-container premium-contact-section">
             <div class="maang-contact-content">
                 <header class="maang-contact-header">
-                    <h2 class="maang-contact-title section-title">Let’s talk about interesting problems.</h2>
+                    <h2 class="maang-contact-title section-title">Let's talk about interesting problems.</h2>
                     <p class="maang-contact-supporting">
-                        If you’re working on data-heavy software or AI-powered systems where reliability matters, I’d be
+                        If you're working on data-heavy software or AI-powered systems where reliability matters, I'd be
                         glad to connect.
                     </p>
                 </header>
@@ -517,9 +620,88 @@
                         <button type="submit" class="maang-submit-btn">Send message</button>
                     </form>
                     <p class="maang-footer-microcopy">
-                        I read every message and respond when there’s a meaningful overlap.
+                        I read every message and respond when there's a meaningful overlap.
                     </p>
                 </div>
+                <span id="msg"></span>
+            </div>
+        </div>
+
+        <!-- MYSTIC MODE: Ritual Summoning Contact Section -->
+        <div class="mystic-contact-section">
+            <div class="ritual-atmosphere">
+                <!-- Floating fog layers -->
+                <div class="ritual-fog ritual-fog-1"></div>
+                <div class="ritual-fog ritual-fog-2"></div>
+
+                <!-- Ambient grain -->
+                <div class="ritual-grain"></div>
+            </div>
+
+            <div class="container ritual-contact-container">
+                <!-- Summoning Header -->
+                <header class="ritual-header">
+                    <span class="ritual-sigil-top">◈</span>
+                    <h2 class="ritual-title">Initiate Contact</h2>
+                    <div class="ritual-separator"></div>
+                    <p class="ritual-intro">Leave your trace in the dark. I respond when the alignment is right.</p>
+                </header>
+
+                <!-- Ritual Form Chamber -->
+                <div class="ritual-chamber">
+                    <!-- Summoning circle decoration -->
+                    <div class="summoning-circle">
+                        <div class="circle-outer"></div>
+                        <div class="circle-inner"></div>
+                    </div>
+
+                    <form name="submit-to-google-sheet" class="ritual-form">
+                        <!-- Name Input -->
+                        <div class="ritual-input-group">
+                            <label for="ritual-name" class="ritual-label">
+                                <span class="label-sigil">I</span>
+                                <span class="label-text">Identity</span>
+                            </label>
+                            <input type="text" id="ritual-name" name="Name" class="ritual-input" placeholder="Who summons?" required>
+                            <div class="input-blood-line"></div>
+                        </div>
+
+                        <!-- Email Input -->
+                        <div class="ritual-input-group">
+                            <label for="ritual-email" class="ritual-label">
+                                <span class="label-sigil">II</span>
+                                <span class="label-text">Signal</span>
+                            </label>
+                            <input type="email" id="ritual-email" name="Email" class="ritual-input" placeholder="How do I reach the void?" required>
+                            <div class="input-blood-line"></div>
+                        </div>
+
+                        <!-- Message Input -->
+                        <div class="ritual-input-group">
+                            <label for="ritual-message" class="ritual-label">
+                                <span class="label-sigil">III</span>
+                                <span class="label-text">Transmission</span>
+                            </label>
+                            <textarea id="ritual-message" name="Message" class="ritual-input ritual-textarea" rows="6" placeholder="Speak into the darkness..." required></textarea>
+                            <div class="input-blood-line"></div>
+                        </div>
+
+                        <!-- Submit Seal -->
+                        <button type="submit" class="ritual-seal-btn">
+                            <span class="seal-inner">
+                                <span class="seal-sigil">✦</span>
+                                <span class="seal-text">Complete the Ritual</span>
+                                <span class="seal-sigil">✦</span>
+                            </span>
+                            <div class="seal-glow"></div>
+                        </button>
+                    </form>
+
+                    <p class="ritual-footer-text">
+                        Messages are received in silence. Responses emerge when worthy.
+                    </p>
+                </div>
+
                 <span id="msg"></span>
             </div>
         </div>
